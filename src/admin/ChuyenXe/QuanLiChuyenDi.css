@@ -1,0 +1,142 @@
+/* Cấu hình cơ bản cho trang quản lý chuyến đi */
+.quan-li {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9; /* Màu nền sáng */
+}
+
+/* Tiêu đề */
+.quan-li h2 {
+  text-align: center;
+  color: #333; /* Màu chữ tối */
+  margin-bottom: 20px;
+}
+
+/* Form thêm chuyến đi */
+.quan-li form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Khoảng cách giữa các trường */
+  max-width: 400px;
+  margin: 0 auto; /* Canh giữa form */
+  background-color: #fff; /* Màu nền trắng */
+  padding: 20px; /* Padding bên trong */
+  border-radius: 8px; /* Bo góc */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+}
+
+/* Trường chọn tuyến và giờ đi */
+.quan-li select,
+.quan-li input[type="date"],
+.quan-li input[type="time"],
+.quan-li input[type="text"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.quan-li select:focus,
+.quan-li input[type="date"]:focus,
+.quan-li input[type="time"]:focus,
+.quan-li input[type="text"]:focus {
+  border-color: #007bff; /* Đổi màu đường viền khi chọn */
+  outline: none; /* Xóa đường viền mặc định */
+}
+
+/* Nút thêm chuyến đi (submit button) */
+.quan-li button[type="submit"] {
+  background-color: #28a745; /* Màu xanh lá */
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.quan-li button[type="submit"]:hover {
+  background-color: #218838; /* Màu khi di chuột qua */
+}
+
+/* Nút sửa chuyến đi */
+.quan-li .edit-button {
+  background-color: #ffc107; /* Màu vàng */
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.quan-li .edit-button:hover {
+  background-color: #e0a800; /* Màu vàng đậm hơn khi di chuột qua */
+}
+
+/* Nút xóa chuyến đi */
+.quan-li .delete-button {
+  background-color: #dc3545; /* Màu đỏ */
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.quan-li .delete-button:hover {
+  background-color: #c82333; /* Màu đỏ đậm hơn khi di chuột qua */
+}
+
+/* Hiển thị chi tiết tuyến đường */
+.route-details {
+  max-width: 400px;
+  margin: 20px auto;
+  background-color: #f1f1f1; /* Màu nền nhạt */
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+}
+
+.route-details h3 {
+  text-align: center;
+  color: #007bff; /* Màu xanh lam cho tiêu đề */
+  margin-bottom: 10px;
+}
+
+.route-details p {
+  margin: 5px 0;
+  color: #333;
+  font-size: 15px;
+}
+
+/* Bảng hiển thị danh sách chuyến đi */
+.trip-table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+.trip-table th, .trip-table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.trip-table th {
+  background-color: #f2f2f2; /* Màu nền tiêu đề */
+  color: #333;
+}
+
+/* Khoảng cách giữa các nút trong cột */
+.trip-table td .button-group {
+  display: flex;
+  margin-right: 10px;
+  gap: 5px; /* Khoảng cách giữa các nút */
+}

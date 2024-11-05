@@ -1,0 +1,110 @@
+/* Cấu hình cơ bản cho toàn bộ trang quản lý lịch trình */
+.quan-li {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9; /* Màu nền nhẹ */
+}
+
+/* Tiêu đề */
+.quan-li h2 {
+  text-align: center;
+  color: #333; /* Màu chữ tối */
+  margin-bottom: 20px;
+}
+
+/* Form thêm lịch trình */
+.quan-li form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Khoảng cách giữa các trường */
+  max-width: 400px; /* Chiều rộng tối đa cho form */
+  margin: 0 auto; /* Giữa màn hình */
+  background-color: #fff; /* Màu nền trắng */
+  padding: 20px; /* Padding bên trong */
+  border-radius: 5px; /* Bo góc */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+}
+
+/* Trường chọn tỉnh và loại xe */
+.quan-li select {
+  padding: 10px; /* Padding bên trong */
+  border: 1px solid #ccc; /* Đường viền */
+  border-radius: 5px; /* Bo góc */
+  font-size: 16px; /* Kích thước chữ */
+  background-color: #fff; /* Màu nền dropdown */
+  cursor: pointer; /* Con trỏ chuột */
+  appearance: none; /* Loại bỏ phong cách mặc định của trình duyệt */
+  -webkit-appearance: none; /* Loại bỏ phong cách mặc định cho Safari/Chrome */
+  -moz-appearance: none; /* Loại bỏ phong cách mặc định cho Firefox */
+  background-image: url('data:image/svg+xml;base64,...'); /* Icon dropdown tùy chỉnh */
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+  margin-right: 10px;
+}
+
+.quan-li select:focus {
+  border-color: #007bff; /* Đổi màu đường viền khi chọn */
+  outline: none; /* Xóa đường viền mặc định */
+}
+
+/* Trường nhập liệu */
+.quan-li input[type="text"] {
+  padding: 10px; /* Padding bên trong */
+  border: 1px solid #ccc; /* Đường viền */
+  border-radius: 5px; /* Bo góc */
+  font-size: 16px; /* Kích thước chữ */
+}
+
+.quan-li input[type="date"]{
+  padding: 10px 0px 10px 10px !important;
+  max-width: 378px !important;
+}
+
+/* Nút thêm lịch trình */
+.quan-li button[type="submit"] {
+  background-color: #28a745; /* Màu xanh lá */
+  color: white; /* Màu chữ trắng */
+  border: none; /* Không có đường viền */
+  padding: 10px; /* Padding bên trong */
+  border-radius: 5px; /* Bo góc */
+  cursor: pointer; /* Con trỏ chuột khi di chuột qua */
+  font-size: 16px; /* Kích thước chữ */
+}
+
+.quan-li button[type="submit"]:hover {
+  background-color: #218838; /* Màu khi di chuột qua */
+}
+
+/* Bảng lịch trình */
+.quan-li table {
+  width: 100%; /* Đặt chiều rộng bằng 100% */
+  border-collapse: collapse; /* Gộp các đường viền */
+  margin-top: 20px; /* Khoảng cách với form */
+}
+
+.quan-li th, .quan-li td {
+  border: 1px solid #ccc; /* Đường viền */
+  padding: 10px; /* Padding bên trong */
+  text-align: left; /* Căn lề trái */
+}
+
+.quan-li th {
+  background-color: #007bff; /* Màu nền tiêu đề bảng */
+  color: white; /* Màu chữ tiêu đề bảng */
+}
+
+/* Nút xóa trong bảng */
+.quan-li button {
+  background-color: #dc3545; /* Màu đỏ */
+  color: white; /* Màu chữ trắng */
+  border: none; /* Không có đường viền */
+  padding: 5px 10px; /* Padding bên trong */
+  border-radius: 5px; /* Bo góc */
+  margin-right: 10px;
+  cursor: pointer; /* Con trỏ chuột khi di chuột qua */
+}
+
+.quan-li button:hover {
+  background-color: #c82333; /* Màu khi di chuột qua */
+}

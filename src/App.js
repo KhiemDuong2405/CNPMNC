@@ -1,24 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import UserLayout from './UserLayout';
+import AdminLayout from './AdminLayout';
+import Body from './pages/trangchu/Body';
+import LienHe from './pages/lienhe/lienhe';
+import VeChungToi from './pages/vechungtoi/vechungtoi';
+import LichTrinh from './pages/lichtrinh/lichtrinh';
+import TraCuuVe from './pages/tracuu/tracuuve';
+import TinTuc from './pages/tintuc/tintuc';
+import Login from './pages/login/login';
+import DatVe from './pages/datve/datve';
+import LichTrinhAdmin from './admin/LichTrinh/QuanLiLichTrinh';
+import ChuyenXeAdmin from './admin/ChuyenXe/QuanLiChuyenDi';
+import QuanLiXe from './admin/QuanLiXe/QuanLiXe'; 
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+
+        {/* User */}
+        <Route element={<UserLayout />}>
+          <Route path="/" element={<Body />} />
+          <Route path="/contact" element={<LienHe />} />
+          <Route path="/aboutus" element={<VeChungToi />} />
+          <Route path="/schedule" element={<LichTrinh />} />
+          <Route path="/rescueticket" element={<TraCuuVe />} />
+          <Route path="/tintuc" element={<TinTuc />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/datve" element={<DatVe />} />
+        </Route>
+
+        {/* Admin */}
+        <Route element={<AdminLayout />}>
+          <Route path="/quanlilichtrinh" element={<LichTrinhAdmin />} />
+          <Route path="/quanlichuyendi" element={<ChuyenXeAdmin />} />
+          <Route path="/quanlixe" element={<QuanLiXe />} /> 
+
+        </Route>
+      </Routes>
+    </Router>
   );
 }
 

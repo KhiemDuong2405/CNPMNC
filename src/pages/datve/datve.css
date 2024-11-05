@@ -1,0 +1,365 @@
+.chon-chuyen-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* Tỉ lệ cột */
+  gap: 20px;
+  width: 80%; /* Chiều rộng của container */
+  max-width: 1200px; /* Giới hạn chiều rộng tối đa */
+  margin: 0 auto; /* Đưa ra giữa màn hình theo chiều ngang */
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  
+}
+
+.chon-ghe, .thong-tin-luot-di, .chi-tiet-gia, .customer-form-container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.thong-tin-luot-di ul{
+  padding: 0;
+}
+
+.thong-tin-luot-di ul li{
+  list-style: none;
+
+}
+
+.diadiem{
+  border: 1px solid gray;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 10px;
+}
+
+.pickdrop{
+  padding-left: 5px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+  .customer-form-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+.customer-info-section {
+  width: 50%;
+}
+
+.terms-and-notes {
+  width: 50%;
+  padding-left: 20px;
+}
+.terms-and-notes p strong .highlight-number, h3, h2 {
+  color: #ff5e00; /* Màu cho số trong thẻ strong */
+}
+
+.thong-tin-don-tra {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+/* Phần container cho thông tin đón và trả */
+.thong-tin-don-tra {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.thong-tin-don-tra h2 {
+  font-size: 18px;
+  margin-bottom: 0px;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+
+}
+
+.info-icon {
+  background-color: #ff5e00;
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  margin-left: 5px;
+  border-radius: 50%;
+  color: white;
+  text-align: center;
+}
+
+.pickup-dropoff-container {
+  display: flex;
+  justify-content: space-between;
+  
+  margin-bottom: 20px;
+}
+
+.pickup label, .dropoff label {
+  font-weight: bold;
+  margin-bottom: 10px;
+  display: inline-block; /* Đảm bảo rằng các phần tử label và input nằm trên cùng một hàng */
+  font-size: 16px;
+  margin-right: 10px; /* Tạo khoảng cách giữa label và input */
+}
+
+.pickup select, .dropoff select {
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.info {
+  font-size: 14px;
+  margin-top: 5px;
+  color: #333;
+}
+
+.highlight-number {
+  color: #ff5e00;
+  font-weight: bold;
+}
+
+.payment-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.payment-method {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.payment-method span {
+  display: block;
+  margin-top: 5px;
+  font-size: 16px;
+  color: #ff5e00;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Nút Hủy với đường viền */
+.cancel-btn {
+  background-color: white; /* Nền trắng */
+  color: #ff5e00; /* Màu chữ cam */
+  border: 2px solid #bfbebe; /* Đường viền cam dày 2px */
+  border-radius: 20px; /* Bo góc nhẹ */
+  padding: 10px 20px; /* Khoảng cách bên trong */
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Hiệu ứng hover */
+}
+
+/* Nút Hủy khi hover */
+.cancel-btn:hover {
+  background-color: #ff5e00; /* Màu nền cam khi hover */
+  color: white; /* Màu chữ trắng khi hover */
+}
+
+/* Nút Thanh toán với nền cam và đường viền */
+.pay-btn {
+  background-color: #ff5e00; /* Nền cam */
+  color: white; /* Màu chữ trắng */
+  border: 2px solid #ff5e00; /* Đường viền cam dày 2px */
+  border-radius: 20px; /* Bo góc nhẹ */
+  padding: 10px 20px; /* Khoảng cách bên trong */
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Hiệu ứng hover */
+}
+
+/* Nút Thanh toán khi hover */
+.pay-btn:hover {
+  background-color: white; /* Màu nền trắng khi hover */
+  color: #ff5e00; /* Màu chữ cam khi hover */
+}
+
+
+
+
+/* Container chính */
+.chon-chuyen-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* Tỉ lệ cột */
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+/* Bố trí ghế theo kiểu 1-1-1 */
+.seat-floor {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* Chia thành 3 cột */
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+/* Phong cách ghế */
+.seat {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  border: 2px solid transparent;
+  background-color: #e0f7fa;
+
+}
+
+.seat.sold {
+  background-color: #ccc;
+  color: white;
+  cursor: not-allowed;
+}
+
+.seat.selected {
+  background-color: #ff5e00;
+  color: white;
+}
+
+.seat:not(.sold):hover {
+  border-color: #ff5e00;
+}
+
+.seat-info {
+  display: flex;
+  margin-top: 10px;
+}
+
+.seat-info div {
+  display: flex;
+  align-items: center;
+  margin-right: 50px;
+}
+.seat-info div p{
+  margin-left: 5px;
+}
+
+.seat-info div div {
+  width: 40px;
+  height: 40px;
+  margin-right: 5px;
+  border-radius: 3px;
+}
+
+.mau-da-mua {
+  background-color: #ccc;
+}
+
+.mau-ghe-trong {
+  background-color: #e0f7fa;
+}
+
+.mau-dang-chon {
+  background-color: #ff5e00;
+}
+.booking-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  width: 700px;
+  max-width: 1200px; /* Giới hạn chiều rộng tối đa */
+  margin-top: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Khung thông tin khách hàng */
+.customer-info {
+  width: 65%;
+  padding: 20px;
+  border-radius: 10px;
+}
+.phone-display{
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  min-height: 18px;
+}
+/* Form thông tin khách hàng */
+.customer-form .form-group {
+  margin-bottom: 15px;
+}
+
+.form-group{
+  gap: 10px;
+}
+
+.form-group p{
+  margin: 0;
+}
+
+.customer-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.customer-form input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Điều khoản */
+.terms {
+  border-radius: 10px;
+  font-size: 14px;
+  color: black;
+  display: flex;
+  align-items: center;
+}
+
+/* Các đoạn văn trong điều khoản */
+.terms p {
+  margin-bottom: 10px;
+}
+
+.terms .highlight {
+  color: #ff5722;
+  font-weight: bold;
+}
+
+.submit-button {
+  background-color: #FF4500;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.submit-button.disabled-button {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}

@@ -1,0 +1,74 @@
+/* bienso.css */
+
+.quan-li-bien-so {
+  padding: 20px;
+}
+
+.quan-li-bien-so h2 {
+  margin-bottom: 20px;
+}
+
+.quan-li-bien-so form {
+  margin-bottom: 20px;
+}
+
+.quan-li-bien-so input, .loai-xe {
+  padding: 8px;
+  margin-right: 10px;
+}
+
+.quan-li-bien-so button {
+  padding: 8px 15px;
+}
+
+.quan-li-bien-so table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.quan-li-bien-so th, .quan-li-bien-so td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.quan-li-bien-so tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.quan-li-bien-so tr:hover {
+  background-color: #ddd;
+}
+
+.maintenance-button, .stop-button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.maintenance-button {
+  background-color: #007bff;
+  color: white;
+}
+
+.maintenance-button:hover {
+  background-color: #0056b3;
+}
+
+.stop-button {
+  background-color: #ff6600;
+  color: white;
+}
+
+.stop-button:hover {
+  background-color: #ff3300;
+}
+.btn-ql{
+  margin-right: 5px;
+}
+
+.bienso, .trangthai, .hoatdong, .suaxoa{
+  width: 100px;
+}

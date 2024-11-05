@@ -1,0 +1,324 @@
+/* Navbar Styles */
+.navbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ff6200;
+  padding: 10px 20px;
+  width: 100%;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Thêm bóng cho navbar */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+/* Updated selected language section */
+.language-selector {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  padding: 5px;
+  
+  
+  
+}
+
+.selected-language {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  background-color: transparent;
+  border: none;
+}
+
+.flag-icon {
+  width: 20px; /* Đặt kích thước nhỏ hơn cho hình ảnh */
+  height: 20px;
+  border-radius: 50%; /* Làm cho hình ảnh tròn */
+  object-fit: cover; /* Đảm bảo ảnh giữ nguyên tỷ lệ */
+  margin-right: 5px;
+}
+
+.dropdown-icon {
+  margin-left: 10px;
+  font-size: 10px;
+}
+
+/* Dropdown Styles */
+.language-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  width: 100px;
+  z-index: 1000;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.language-dropdown li {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.language-dropdown li:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.language-dropdown img {
+  width: 20px; /* Đảm bảo kích thước flag trong dropdown cũng nhỏ */
+  height: 20px;
+  margin-right: 5px;
+  border-radius: 50%;
+}
+
+/* App Download Section */
+.app-download {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  padding: 5px;
+  
+}
+
+.selected-app {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  background-color: transparent;
+  border: none;
+}
+
+.app-icon {
+  width: 20px; /* Đặt kích thước nhỏ hơn cho hình ảnh */
+  height: 20px;
+  margin-right: 5px;
+}
+
+.app-dropdown-icon {
+  margin-left: 10px;
+  font-size: 10px;
+}
+
+/* Dropdown Styles for App Download */
+.app-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  width: 150px; /* Bạn có thể thay đổi kích thước cho dropdown App */
+  z-index: 1000;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.app-dropdown li {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.app-dropdown li:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.app-dropdown span {
+  font-size: 14px;
+  margin-left: 5px;
+}
+
+
+.navbar-center {
+  text-align: center;
+}
+
+.navbar-center .logo {
+  width: 150px;
+}
+
+.login-button {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  color: black;
+  border: 2px solid #ff6200;
+  border-radius: 20px;
+  padding: 5px 15px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Thêm hiệu ứng chuyển đổi */
+}
+.login-button a {
+  display: flex;
+  align-items: center;
+  background: none; /* Không có nền cho a */
+  border: none; /* Không có viền cho a */
+  box-shadow: none; /* Không có đổ bóng */
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+}
+
+.login-button .icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+
+
+
+.navbar-menu {
+  width: 100%;
+  background-color: #ff6200;
+  text-align: center;
+  margin-top: 10px;
+ 
+}
+
+.navbar-menu ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-wrap: wrap; 
+}
+
+.navbar-menu ul li {
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+  position: relative;
+  font-weight: 400;
+  margin-right: 20px;
+  transition: all 0.3s ease; /* Thêm hiệu ứng chuyển màu khi hover */
+}
+
+.navbar-menu ul li a {
+  text-decoration: none;
+  color: white;
+}
+.navbar-menu ul li a.active-link {
+  color: blue;
+  opacity: 0.8;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .navbar-top {
+    flex-direction: column; /* Đổi thành column trên màn hình nhỏ */
+  }
+
+  .navbar-center .logo {
+    width: 120px; /* Thu nhỏ logo trên màn hình nhỏ */
+  }
+
+  .navbar-menu ul {
+    flex-direction: column;
+  }
+
+  .navbar-menu ul li {
+    padding: 15px 10px;
+  }
+}
+/* Container của user info */
+.user-info-container {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  padding: 5px;
+}
+
+/* Phần user info */
+.user-info-container {
+  display: flex;
+  align-items: center;
+  background-color: #f5f5f5; /* Màu nền cho user info */
+  color: black;
+  border: 2px solid #ff6200; /* Đường viền màu cam */
+  border-radius: 20px; /* Bo góc cho user info */
+  padding: 5px 15px; /* Khoảng cách trong */
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Hiệu ứng chuyển đổi */
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+
+.user-info-container .icon {
+  width: 20px; /* Kích thước icon */
+  height: 20px;
+  margin-right: 8px; /* Khoảng cách giữa icon và số điện thoại */
+}
+
+/* Dropdown Styles */
+.user-dropdown {
+  position: absolute;
+  top: 100%; /* Đặt menu dropdown ngay dưới phần tử user info */
+  left: 0; /* Căn trái với phần tử cha */
+  background-color: #fff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+  border-radius: 8px; /* Bo góc cho menu */
+  list-style-type: none;
+  padding: 10px 0;
+  margin: 10px 0 0;
+  z-index: 1000;
+  width: 220px; /* Chiều rộng của menu */
+}
+
+/* Mục trong dropdown */
+.user-dropdown li {
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 14px;
+  color: #333;
+}
+
+.user-dropdown li:hover {
+  background-color: #f5f5f5; /* Màu nền khi hover */
+}
+
+/* Bo tròn các góc đầu và cuối */
+.user-dropdown li:first-child {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.user-dropdown li:last-child {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+

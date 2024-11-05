@@ -1,0 +1,111 @@
+/* Container tổng cho login */
+/* Định dạng chung cho body-container */
+.body-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px; /* Giới hạn chiều rộng tối đa của container */
+  margin: 0 auto; /* Căn giữa container */
+  padding: 20px; /* Khoảng cách xung quanh container */
+  background-color: #fff; /* Màu nền trắng */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Tạo bóng đổ */
+  border-radius: 10px; /* Bo góc */
+}
+
+/* Phần bên trái (left-section) */
+.left-section {
+  flex: 1; /* Chiếm 1 phần của màn hình */
+  max-width: 50%; /* Chiều rộng tối đa là 50% */
+}
+
+.full-left-image {
+  width: 100%; /* Hình ảnh chiếm hết chiều rộng của left-section */
+  height: auto;
+  border-radius: 10px; /* Bo góc cho hình ảnh */
+}
+
+/* Phần bên phải (right-section) */
+.right-section {
+  flex: 1;
+  max-width: 40%; /* Chiều rộng tối đa là 40% */
+  padding-left: 20px; /* Khoảng cách giữa left-section và right-section */
+}
+
+.login-box {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px 10px 20px 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.login-box h3 {
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group input {
+  width: 97%;
+  padding: 10px 0px 10px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+
+
+
+/* Phần Kết nối FUTA Group */
+.futa-group-section {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #fff;
+  margin-top: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.futa-group-section h2 {
+  font-size: 24px;
+  color: #065e24;
+  margin-bottom: 10px;
+}
+
+.futa-group-section p {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.services {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.service-item img {
+  width: 100%;
+  max-width: 100px;
+  border-radius: 8px;
+}
+
+.otp-inputs{
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+}
+.otp-inputs input{
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  text-align: center;      
+  vertical-align: middle;
+  font-size: 18px;
+}
+.login-button{
+  margin-top: 10px;
+}

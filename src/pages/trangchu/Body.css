@@ -1,0 +1,741 @@
+.banner {
+  position: relative;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.banner-image {
+  width: 1150px;
+  height: auto;
+  border-radius: 20px;
+}
+.search-form-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.search-form {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 1130px;
+  max-width: 100%;
+  border: 1px solid #f37021;
+}
+
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.form-group:last-child {
+  margin-right: 0;
+}
+
+.form-group input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.search-button {
+  background-color: #f37021;
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.search-button:hover {
+  background-color: #d45d1a;
+}
+
+.flag-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  border-radius: 20px;
+}
+.language-selector {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.selected-language {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  background-color: transparent; /* Không có nền */
+  border: none; /* Không viền */
+  cursor: pointer;
+}
+
+.selected-language:hover {
+  background-color: transparent; /* Không có nền khi hover */
+}
+
+.flag-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+.dropdown-icon {
+  margin-left: 10px;
+}
+
+.language-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  width: 100px;
+  z-index: 1000;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.language-dropdown li {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.language-dropdown li:hover {
+  background-color: transparent; /* Không có nền khi hover trong danh sách */
+}
+.app-download {
+  position: relative;
+  cursor: pointer;
+}
+
+.selected-app {
+  display: flex;
+  align-items: center;
+}
+
+.app-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  width: 150px;
+  z-index: 1000;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.app-dropdown li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.app-dropdown li:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Điều chỉnh chung cho dropdown */
+.dropdown-icon {
+  margin-left: 5px;
+}
+
+
+.show-ticket-section{
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+.loc-section{
+  width: 20%;
+  padding: 10px 10px 30px 10px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  max-height: 350px;
+}
+
+.loc-section-title{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.loc-section-title p{
+  font-size: 18px;
+}
+.cancel-loc {
+  font-size: 14px !important;
+  color: red;
+  cursor: pointer;
+}
+
+.loai-ghe button{
+  margin-right: 10px;
+  background-color: transparent;
+  color: black;
+  border: 1px solid gray;
+  padding: 10px 20px ;
+}
+.loai-ghe button:hover{
+  background-color: transparent;
+  border: 1px solid orange;
+  color: orange;
+  
+}
+
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px; 
+  cursor: pointer;
+}
+
+.check-loc{
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.ketqua-section{
+  min-width: 55%;
+  min-height: 500px;
+  margin-left: 10px;
+  padding-top: 10px;
+}
+
+.ketqua-section p{
+  font-size: 26px;
+  margin: 0;
+  margin-left: 10px;
+}
+.khong-ketqua{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.khong-ketqua p{
+  font-size: 20px;
+  margin-top: 50px;
+
+}
+
+.ticket-card{
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.time-location{
+  display: flex;
+  justify-content: space-between;
+}
+
+.departure, .duration, .arrival{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.departure span, .duration span, .arrival span{
+  margin-top: 10px;
+  font-size: 16px;
+}
+.gio{
+  font-size: 22px !important;
+  font-weight: 600;
+}
+.duration-class{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  margin: 0 10px;
+}
+.line {
+  height: 1px;       
+  background-color: orange; 
+  flex-grow: 1;     
+  margin-left: 10px; 
+  width: 150px;
+  margin: 0 10px;
+}
+
+.duration-class img{
+  max-width: 10px;
+}
+
+.bus-info{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.bus-info div{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+.bus-info div span{
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+.bus-info div div{
+  width: 10px;
+  height: 10px;
+  border-radius: 15px;
+  background-color: orange;
+  margin-right: 10px;
+}
+
+
+
+
+
+
+
+
+
+.promotions-section {
+  text-align: center;
+  padding: 40px 20px; 
+  background-color: #fff;
+  margin: 40px auto; 
+  width: 90%; 
+  max-width: 1200px; 
+}
+
+.promotions-section h2 {
+  font-size: 28px;
+  color: #2e7d32;
+  margin-bottom: 20px;
+}
+
+.promotions-section h2 {
+  font-size: 24px;
+  color: #2e7d32;
+  margin-bottom: 20px;
+}
+
+/* Swiper slide styling */
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.swiper-slide img {
+  width: 500px;
+  height: 200px; /* Consistent height for the banners */
+  object-fit: cover; /* Ensures the image covers the area without distortion */
+  border-radius: 10px; /* Rounded corners for the images */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adds a shadow for a polished look */
+  max-width: 100%; /* Max width ensures all banners are of the same width */
+}
+
+/* Pagination bullets for Swiper */
+.swiper-pagination-bullet {
+  background-color: #ff4500; /* Color for inactive pagination bullets */
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #ff0000; /* Color for the active pagination bullet */
+}
+
+/* Media Queries for smaller screens */
+@media (max-width: 100%) {
+  .swiper-slide img {
+    max-width: 100%; /* Adjust the width for smaller screens */
+    height: auto; /* Ensure height adjusts automatically */
+  }
+}
+/* Popular Routes Section */
+.popular-routes1{
+  background-color: #fff7f5;
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  max-width: 100%;
+}
+.popular-routes {
+  text-align: center;
+  margin: 40px auto;
+  padding: 0 20px;
+  max-width: 100%;
+  width: 90%;
+}
+
+.popular-routes h2 {
+  color: #2e7d32;
+  font-size: 28px;
+}
+
+.popular-routes p {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.route-cards {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-right: 60px;
+}
+
+.route-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 350px;
+  width: 100%;
+  overflow: hidden;
+  text-align: left;
+}
+
+.route-card-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.route-card-body {
+  padding: 20px;
+}
+
+.route-card-body h3 {
+  font-size: 20px;
+  color: #2e7d32;
+  margin-bottom: 15px;
+}
+
+.route-card-body ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.route-card-body ul li {
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.route-card-body ul li span {
+  display: block;
+  color: #888;
+  font-size: 14px;
+}
+
+.route-card-body ul li .price {
+  color: #ff6200;
+  font-size: 16px;
+  font-weight: bold;
+  float: right;
+}
+
+@media (max-width: 768px) {
+  .route-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .route-card {
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+}
+/* Statistics Section */
+.statistics-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  background-color:white;
+  border-radius: 10px;
+  margin: 40px auto;
+  max-width: 100%;
+  width:85%;  
+}
+
+.statistics-container {
+  max-width: 60%;
+  margin-right:80px;
+}
+
+.statistics-container h2 {
+  color: #2e7d32;
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.statistics-container p {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.statistics-items {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.stat-icon {
+  width: 60px;
+  height: 60px;
+}
+
+.stat-text h3 {
+  font-size: 20px;
+  color: #333;
+  margin: 0;
+}
+
+.stat-text p {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}
+
+.illustration-container {
+  max-width: 30%;
+}
+
+.illustration-image {
+  width: 100%;
+  height: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .statistics-section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .illustration-container {
+    max-width: 100%;
+    margin-top: 20px;
+  }
+
+  .statistics-container {
+    max-width: 100%;
+  }
+
+  .statistics-items {
+    flex-direction: column;
+  }
+}
+.news-section {
+  text-align: center;
+  padding: 40px 20px; 
+  background-color: #fff7f5;
+  margin: 40px auto; 
+  width: 90%; 
+  height: 400px;
+  max-width: 1200px; 
+}
+
+.news-header {
+  display: flex;
+  justify-content: center; /* Center the header text */
+  align-items: center;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.news-header h2 {
+  color: #2e7d32;
+  font-size: 28px;
+  margin: 0; /* Remove default margins */
+}
+
+.view-all {
+  color: #ff6200;
+  font-weight: bold;
+  text-decoration: none;
+  position: absolute;
+  right: 0; /* Aligns the "Xem tất cả" to the right */
+}
+
+.view-all:hover {
+  text-decoration: underline;
+}
+
+.news-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 400; /* Ensure all cards are of equal height */
+  width:380px;
+  margin-bottom: 30px;
+}
+
+.news-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.news-details {
+  padding: 15px;
+  flex-grow: 1; 
+  display: flex;
+  height: 170px;
+  margin-bottom: 10px;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.news-details h3 {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 10px;
+  flex-grow: 1;
+}
+
+.news-details p {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 10px;
+}
+
+.news-link {
+  color: #ff6200;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.news-link:hover {
+  text-decoration: underline;
+}
+
+.news-cards {
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* Spacing between cards */
+}
+
+.news-card-wrapper {
+  flex: 1;
+  max-width: 30%; /* Control the size of each card */
+}
+
+@media (max-width: 1024px) {
+  .news-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .news-card-wrapper {
+    max-width: 90%;
+    margin-bottom: 20px;
+  }
+}
+/* Main Section Styling */
+.futa-group-section {
+  text-align: center;
+  padding: 20px 20px;
+  background-color: white;
+  border-radius: 10px;
+  margin: 50px auto;
+  max-width: 1200px;
+}
+
+.futa-group-section h2 {
+  font-size: 28px;
+  color: #2e7d32;
+  margin-bottom: 10px;
+}
+
+.futa-group-section p {
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+/* Service Item Container */
+.services {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Individual Service Item */
+.service-item {
+  text-align: center;
+  max-width: 200px;
+}
+
+.service-item img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-bottom: 10px;
+  justify-content: center;
+}
+
+.service-item h3 {
+  font-size: 16px;
+  color: #333;
+}
+
+.highlighted {
+  color: #ff6200;
+  font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .services {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .service-item {
+    max-width: 100%;
+  }
+}
