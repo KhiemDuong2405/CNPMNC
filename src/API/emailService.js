@@ -22,6 +22,7 @@ app.post('/send-ticket', async (req, res) => {
     name,
     phone,
     date,
+    hour, 
     from,
     to,
     ghe,
@@ -40,6 +41,7 @@ app.post('/send-ticket', async (req, res) => {
       <p><strong>Tên khách hàng:</strong> ${name}</p>
       <p><strong>Số điện thoại:</strong> ${phone}</p>
       <p><strong>Ngày đi:</strong> ${date}</p>
+      <p><strong>Thời gian:</strong> ${hour}</p>
       <p><strong>Điểm đi:</strong> ${from}</p>
       <p><strong>Điểm đến:</strong> ${to}</p>
       <p><strong>Loại xe:</strong> ${type}</p>

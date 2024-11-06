@@ -100,6 +100,7 @@ function ChonChuyen() {
       const busLicensePlate = selectedTrip.idxe;
       const tripPrice = selectedTrip.price * selectedSeats.length;
       const busType = selectedTrip.type;
+      const hour = selectedTrip.timedi;
   
       const bookingCode = generateRandomCode(); 
   
@@ -109,14 +110,15 @@ function ChonChuyen() {
         price: tripPrice,             
         type: busType,                
         name: customerInfo.name,      
-        date: tripDate,               
+        date: tripDate,              
         from,                         
         to                           
       };
   
       const emailData = {
         ...bookingData,          
-        phone: phoneNumber,      
+        phone: phoneNumber,
+        hour,
         bookingCode              
       };
   
@@ -142,7 +144,6 @@ function ChonChuyen() {
         alert('Đặt vé thành công nhưng không thể gửi email.');
       }
   
-      // Reset lại trạng thái
       setCustomerInfo({ name: '', phone: '', email: '' });
       setSelectedSeats([]);
       setAcceptedTerms(false);
