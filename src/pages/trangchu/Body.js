@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { database } from '../../API/firebaseconfig';
 import { ref, onValue } from "firebase/database";
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import TawkTo from '../../API/ChatLive'; // Đảm bảo đúng đường dẫn đến tệp TawkTo.js
+
 import 'swiper/css';
 import 'swiper/css/pagination';
 import './Body.css';
@@ -467,6 +469,8 @@ function Body() {
           </div>
         </div>
       </div>
+      <TawkTo /> {/* Hiển thị chat live */}
+
     </div>
   );
 }
