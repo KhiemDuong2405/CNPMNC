@@ -110,7 +110,8 @@ function ChonChuyen() {
         price: tripPrice,             
         type: busType,                
         name: customerInfo.name,      
-        date: tripDate,              
+        date: tripDate,
+        hour,          
         from,                         
         to                           
       };
@@ -118,7 +119,6 @@ function ChonChuyen() {
       const emailData = {
         ...bookingData,          
         phone: phoneNumber,
-        hour,
         bookingCode              
       };
   
