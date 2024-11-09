@@ -12,7 +12,9 @@ import Login from './pages/login/login';
 import DatVe from './pages/datve/datve';
 import LichTrinhAdmin from './admin/LichTrinh/QuanLiLichTrinh';
 import ChuyenXeAdmin from './admin/ChuyenXe/QuanLiChuyenDi';
-import QuanLiXe from './admin/QuanLiXe/QuanLiXe'; 
+import QuanLiXe from './admin/QuanLiXe/QuanLiXe';
+import QuanLiDoanhThu from './admin/DoanhThu/QuanLyDoanhThu';
+import QuanLiKhachHang from './admin/KhachHang/QuanLiKhachHang';
 
 function App() {
   return (
@@ -35,8 +37,9 @@ function App() {
         <Route element={<AdminLayout />}>
           <Route path="/quanlilichtrinh" element={<LichTrinhAdmin />} />
           <Route path="/quanlichuyendi" element={<ChuyenXeAdmin />} />
-          <Route path="/quanlixe" element={<QuanLiXe />} /> 
-
+          <Route path="/quanlixe" element={<QuanLiXe />} />
+          <Route path="/quanlidoanhthu" element={<QuanLiDoanhThu />} />
+          <Route path="/quanlikhachhang" element={<QuanLiKhachHang/>} />
         </Route>
       </Routes>
     </Router>

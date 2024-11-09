@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { database } from '../../API/firebaseconfig';
 import { ref, onValue } from "firebase/database";
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import TawkTo from '../../API/ChatLive'; // Đảm bảo đúng đường dẫn đến tệp TawkTo.js
+import TawkTo from '../../API/ChatLive';
 
 import 'swiper/css';
 import 'swiper/css/pagination';

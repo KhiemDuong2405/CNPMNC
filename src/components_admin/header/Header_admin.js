@@ -47,44 +47,54 @@ function Header() {
   }
 
   return (
-    <div className="navbar">
-      <div className="navbar-top">
-        <div className="navbar-left navbar-left-2">
-          <div className="user-info">
+      <div className="navbar">
+        <div className="navbar-top">
+          <div className="navbar-left navbar-left-2">
+            <div className="user-info">
               <img src={userIcon} alt="User Icon" className="icon" />
-              <span>Chào {phoneNumber} </span>
+              <span>Chào {phoneNumber || "Admin"} </span>
+            </div>
+          </div>
+
+          <div className="navbar-center">
+            <img src={logo} alt="FUTA Bus Lines Logo" className="logo" />
+          </div>
+
+          <div className="navbar-right">
+            <div onClick={handleLogout}>Đăng xuất</div>
           </div>
         </div>
 
-        <div className="navbar-center">
-          <img src={logo} alt="FUTA Bus Lines Logo" className="logo" />
-        </div>
-
-        <div className="navbar-right">
-            <div onClick={handleLogout}>Đăng xuất</div>
+        <div className="navbar-menu">
+          <ul>
+            <li className='menu-admin-link'>
+              <NavLink to="/quanlilichtrinh" className={({ isActive }) => (isActive ? "active-link" : "")}>
+                Quản lí lịch trình
+              </NavLink>
+            </li>
+            <li className='menu-admin-link'>
+              <NavLink to="/quanlichuyendi" className={({ isActive }) => (isActive ? "active-link" : "")}>
+                Quản lí chuyến đi
+              </NavLink>
+            </li>
+            <li className='menu-admin-link'>
+              <NavLink to="/quanlixe" className={({ isActive }) => (isActive ? "active-link" : "")}>
+                Quản lí xe
+              </NavLink>
+            </li>
+            <li className='menu-admin-link'>
+              <NavLink to="/quanlidoanhthu" className={({ isActive }) => (isActive ? "active-link" : "")}>
+                Quản lí doanh thu
+              </NavLink>
+            </li>
+            <li className='menu-admin-link'>
+              <NavLink to="/quanlikhachhang" className={({ isActive }) => (isActive ? "active-link" : "")}>
+                Quản lí khách hàng
+              </NavLink>
+            </li>
+          </ul>
         </div>
       </div>
-
-      <div className="navbar-menu">
-        <ul>
-          <li className='menu-admin-link'>
-            <NavLink to="/quanlilichtrinh" className={({ isActive }) => (isActive ? "active-link" : "")}>
-              Quản lí lịch trình
-            </NavLink>
-          </li>
-          <li className='menu-admin-link'>
-            <NavLink to="/quanlichuyendi" className={({ isActive }) => (isActive ? "active-link" : "")}>
-              Quản lí chuyến đi
-            </NavLink>
-          </li>
-          <li className='menu-admin-link'>
-            <NavLink to="/quanlixe" className={({ isActive }) => (isActive ? "active-link" : "")}>
-              Quản lí xe
-            </NavLink>
-          </li>
-        </ul>
-      </div>
-    </div>
   );
 }
 

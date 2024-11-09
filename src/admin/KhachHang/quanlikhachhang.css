@@ -1,0 +1,68 @@
+.quan-li-khach-hang {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .quan-li-khach-hang h2 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .quan-li-khach-hang form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .quan-li-khach-hang input[type="text"],
+  .quan-li-khach-hang input[type="email"],
+  .quan-li-khach-hang input[type="tel"],
+  .quan-li-khach-hang button {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .quan-li-khach-hang button {
+    background-color: #27ae60;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .quan-li-khach-hang button:hover {
+    background-color: #2ecc71;
+  }
+  
+  .quan-li-khach-hang table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .quan-li-khach-hang table th,
+  .quan-li-khach-hang table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+  }
+  
+  .quan-li-khach-hang table th {
+    background-color: #3498db;
+    color: white;
+  }
+  
+  .quan-li-khach-hang .action-buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .quan-li-khach-hang .action-buttons button {
+    padding: 5px 10px;
+    font-size: 14px;
+  }
+  
