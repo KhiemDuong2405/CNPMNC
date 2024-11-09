@@ -1,0 +1,168 @@
+.payment-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-family: Arial, sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+}
+
+.payment-methods-section {
+    flex: 1;
+    min-width: 300px;
+}
+
+h2 {
+    color: #333;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.payment-option {
+    display: flex;
+    align-items: center;
+    margin: 12px 0;
+}
+
+input[type="radio"] {
+    margin-right: 10px;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.payment-label {
+    display: flex;
+    align-items: center;
+    font-size: 1.2em;
+    color: #333;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.payment-logo {
+    width: 100px;
+    height: 100px;
+    margin-right: 10px;
+}
+
+.payment-details-section {
+    flex: 1;
+    min-width: 300px;
+    text-align: center;
+}
+
+.payment-details-section h3 {
+    font-size: 1.4em;
+    color: #666;
+}
+
+.total-amount {
+    font-size: 2em;
+    color: #e74c3c;
+    margin: 10px 0;
+}
+
+.hold-time {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.qr-section {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.qr-code {
+    width: 180px;
+    height: 180px;
+}
+
+.qr-instructions {
+    text-align: left;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.qr-instructions h4 {
+    color: #27ae60;
+    font-size: 1em;
+    margin-bottom: 10px;
+}
+
+.qr-instructions ol {
+    padding-left: 20px;
+}
+
+.qr-instructions li {
+    font-size: 0.9em;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.info-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    flex: 1;
+    min-width: 300px;
+}
+
+.customer-info, .trip-info, .price-info {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.customer-info h3, .trip-info h3, .price-info h3 {
+    font-size: 1.2em;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.customer-info p, .trip-info p, .price-info p {
+    font-size: 0.95em;
+    color: #000000;
+    margin: 5px 0;
+}
+
+/* Thiết kế cho Chi tiết giá */
+.price-info {
+    background-color: #fff;
+    color: #000;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.price-info h3 {
+    font-size: 1.2em;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.price-info p {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
+}
+
+/* Đường gạch ngang trên dòng Tổng tiền */
+.price-info .total-line {
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #e74c3c;
+    margin-top: 10px;
+}

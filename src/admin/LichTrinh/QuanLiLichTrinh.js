@@ -71,7 +71,6 @@ function QuanLiLichTrinh() {
     e.preventDefault();
     const { from, to, type } = formData;
   
-    // Check if "from" and "to" are the same
     if (from === to) {
       alert("Điểm đi và điểm đến không được trùng nhau.");
       return;

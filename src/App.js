@@ -10,6 +10,7 @@ import TraCuuVe from './pages/tracuu/tracuuve';
 import TinTuc from './pages/tintuc/tintuc';
 import Login from './pages/login/login';
 import DatVe from './pages/datve/datve';
+import ThanhToan from './pages/thanhtoan/thanhtoan';
 import LichTrinhAdmin from './admin/LichTrinh/QuanLiLichTrinh';
 import ChuyenXeAdmin from './admin/ChuyenXe/QuanLiChuyenDi';
 import QuanLiXe from './admin/QuanLiXe/QuanLiXe';
@@ -31,6 +32,7 @@ function App() {
           <Route path="/tintuc" element={<TinTuc />} />
           <Route path="/login" element={<Login />} />
           <Route path="/datve" element={<DatVe />} />
+          <Route path="/thanhtoan" element={<ThanhToan/>}/>
         </Route>
 
         {/* Admin */}

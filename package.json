@@ -2,6 +2,7 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:4500",
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
@@ -10,9 +11,12 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.7",
     "cors": "^2.8.5",
+    "crypto-js": "^4.2.0",
     "express": "^4.21.1",
     "firebase": "^11.0.1",
+    "moment": "^2.30.1",
     "nodemailer": "^6.9.16",
+    "qrcode.react": "^4.1.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-google-recaptcha": "^3.1.0",
@@ -27,7 +31,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "start-api": "node src/API/emailService.js",
-    "dev": "concurrently \"npm start\" \"npm run start-api\""
+    "start-serve-zalopay": "node src/ZaloPay/serve.js",
+    "dev": "concurrently \"npm start\" \"npm run start-api\" \"npm run start-serve-zalopay\""
   },
   "eslintConfig": {
     "extends": [
