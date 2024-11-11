@@ -1,129 +1,122 @@
 import React, { useState, useEffect } from 'react';
 import { database } from '../../API/firebaseconfig';
-import { ref, set, remove, onValue, push } from "firebase/database";
+import { ref, onValue } from 'firebase/database';
 import './quanlikhachhang.css';
 
 function QuanLiKhachHang() {
-  const [customers, setCustomers] = useState([]);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phoneNumber: ''
-  });
-  const [isEditing, setIsEditing] = useState(false);
-  const [editingCustomerId, setEditingCustomerId] = useState(null);
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [customer, setCustomer] = useState(null);
+  const [loadingCustomer, setLoadingCustomer] = useState(false);
+  const [tripDetails, setTripDetails] = useState(null);
+  const [loadingTrip, setLoadingTrip] = useState(true);
 
+  // Fetch thông tin chuyến đi khi ứng dụng khởi động
   useEffect(() => {
-    const customersRef = ref(database, 'customers/');
-    onValue(customersRef, (snapshot) => {
+    const tripRef = ref(database, `Trips/2024-11-07/TP Hồ Chí Minh/Tiền Giang/09:37_Giường`);
+    onValue(tripRef, (snapshot) => {
       const data = snapshot.val();
-      const customersArray = data ? Object.keys(data).map(id => ({ id, ...data[id] })) : [];
-      setCustomers(customersArray);
+      if (data) {
+        setTripDetails(data);
+      }
+      setLoadingTrip(false);
+    }, () => {
+      setLoadingTrip(false);
     });
   }, []);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+  // Fetch thông tin khách hàng khi nhập số điện thoại
+  const fetchCustomer = () => {
+    setLoadingCustomer(true);
+    const customerRef = ref(database, `Customers/${phoneNumber}`);
+    onValue(customerRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        setCustomer({ phoneNumber, ...data });
+      } else {
+        setCustomer(null); // Nếu không tìm thấy khách hàng
+      }
+      setLoadingCustomer(false);
+    });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (isEditing) {
-      const customerRef = ref(database, `customers/${editingCustomerId}`);
-      await set(customerRef, formData);
-      setIsEditing(false);
-      setEditingCustomerId(null);
-    } else {
-      const newCustomerRef = push(ref(database, 'customers'));
-      await set(newCustomerRef, formData);
+  // Xử lý khi người dùng nhấn nút tìm kiếm
+  const handleSearch = () => {
+    if (phoneNumber) {
+      fetchCustomer();
     }
-
-    setFormData({ name: '', email: '', phoneNumber: '' });
-  };
-
-  const handleEdit = (customer) => {
-    setFormData({ name: customer.name, email: customer.email, phoneNumber: customer.phoneNumber });
-    setIsEditing(true);
-    setEditingCustomerId(customer.id);
-  };
-
-  const handleDelete = async (id) => {
-    await remove(ref(database, `customers/${id}`));
   };
 
   return (
-    <div className="quan-li-khach-hang">
-      <h2>Quản Lý Khách Hàng</h2>
-      
-      <form onSubmit={handleSubmit}>
-        <input 
-          type="text" 
-          name="name" 
-          value={formData.name} 
-          onChange={handleInputChange} 
-          placeholder="Tên khách hàng" 
-          required 
-        />
-        <input 
-          type="email" 
-          name="email" 
-          value={formData.email} 
-          onChange={handleInputChange} 
-          placeholder="Email" 
-          required 
-        />
-        <input 
-          type="text" 
-          name="phoneNumber" 
-          value={formData.phoneNumber} 
-          onChange={handleInputChange} 
-          placeholder="Số điện thoại" 
-          required 
-        />
-        
-        <button type="submit">
-          {isEditing ? "Cập Nhật Khách Hàng" : "Thêm Khách Hàng"}
-        </button>
-        
-        {isEditing && (
-          <button 
-            type="button" 
-            onClick={() => {
-              setIsEditing(false);
-              setEditingCustomerId(null);
-              setFormData({ name: '', email: '', phoneNumber: '' });
-            }}>
-            Hủy Chỉnh Sửa
-          </button>
-        )}
-      </form>
+      <div className="quan-li-khach-hang">
+        <h2>Quản Lý Khách Hàng</h2>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Tên</th>
-            <th>Email</th>
-            <th>Số Điện Thoại</th>
-            <th>Hành Động</th>
-          </tr>
-        </thead>
-        <tbody>
-          {customers.map(customer => (
-            <tr key={customer.id}>
-              <td>{customer.name}</td>
-              <td>{customer.email}</td>
-              <td>{customer.phoneNumber}</td>
-              <td>
-                <button onClick={() => handleEdit(customer)}>Sửa</button>
-                <button onClick={() => handleDelete(customer.id)}>Xóa</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+        {/* Tìm kiếm khách hàng theo số điện thoại */}
+        <div className="search-bar">
+          <label htmlFor="phoneNumber">Số Điện Thoại:</label>
+          <input
+              type="text"
+              id="phoneNumber"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+              placeholder="Nhập số điện thoại để tìm kiếm"
+          />
+          <button onClick={handleSearch}>Tìm Kiếm</button>
+        </div>
+
+        {/* Hiển thị thông tin khách hàng */}
+        {loadingCustomer ? (
+            <p>Đang tải thông tin khách hàng...</p>
+        ) : customer ? (
+            <div>
+              <h3>Thông Tin Khách Hàng</h3>
+              <p><strong>Tên:</strong> {customer.name}</p>
+              <p><strong>Số Điện Thoại:</strong> {customer.phoneNumber}</p>
+
+              {/* Hiển thị số vé đã đặt nếu có */}
+              {customer.bookings ? (
+                  <div>
+                    <h4>Vé đã đặt:</h4>
+                    <ul>
+                      {Object.keys(customer.bookings).map((bookingKey) => (
+                          <li key={bookingKey}>
+                            <strong>{bookingKey}</strong> - Ghế: {customer.bookings[bookingKey].seat}
+                          </li>
+                      ))}
+                    </ul>
+                  </div>
+              ) : (
+                  <p>Không có vé đã đặt.</p>
+              )}
+            </div>
+        ) : phoneNumber && !loadingCustomer ? (
+            <p>Không tìm thấy khách hàng với số điện thoại này.</p>
+        ) : null}
+
+        {/* Hiển thị thông tin chuyến đi */}
+        <h3>Thông Tin Chuyến Đi</h3>
+        {loadingTrip ? (
+            <p>Đang tải thông tin chuyến đi...</p>
+        ) : tripDetails ? (
+            <div>
+              <p><strong>Khoảng cách:</strong> {tripDetails.distance}</p>
+              <p><strong>Thời gian:</strong> {tripDetails.duration}</p>
+              <p><strong>Giá:</strong> {tripDetails.price} VND</p>
+              <h4>Tình trạng Ghế:</h4>
+              <div>
+                {Object.keys(tripDetails.seats).map((seat) => (
+                    <button
+                        key={seat}
+                        className={tripDetails.seats[seat] ? 'seat-booked' : 'seat-available'}
+                    >
+                      {seat}
+                    </button>
+                ))}
+              </div>
+            </div>
+        ) : (
+            <p>Không có thông tin chuyến đi.</p>
+        )}
+      </div>
   );
 }
 

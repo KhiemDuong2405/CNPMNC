@@ -19,6 +19,7 @@
 
 .quan-li-bien-so button {
   padding: 8px 15px;
+  min-width: 120px;
 }
 
 .quan-li-bien-so table {
@@ -72,3 +73,4 @@
 .bienso, .trangthai, .hoatdong, .suaxoa{
   width: 100px;
 }
+

@@ -16,6 +16,7 @@ import ChuyenXeAdmin from './admin/ChuyenXe/QuanLiChuyenDi';
 import QuanLiXe from './admin/QuanLiXe/QuanLiXe';
 import QuanLiDoanhThu from './admin/DoanhThu/QuanLyDoanhThu';
 import QuanLiKhachHang from './admin/KhachHang/QuanLiKhachHang';
+import Ketquathanhtoan from "./pages/ketquathanhtoan/ketquathanhtoan";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/datve" element={<DatVe />} />
           <Route path="/thanhtoan" element={<ThanhToan/>}/>
+          <Route path="/ketquathanhtoan" element={<Ketquathanhtoan />} />
         </Route>
 
         {/* Admin */}

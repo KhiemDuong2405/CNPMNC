@@ -1,101 +1,189 @@
 import React, { useState, useEffect } from 'react';
-import { ref, onValue } from 'firebase/database';
+import { getDatabase, ref, onValue } from 'firebase/database';
 import { database } from '../../API/firebaseconfig';
+
 import './quanlydoanhthu.css';
 
 function QuanLiDoanhThu() {
-  const [dailyRevenue, setDailyRevenue] = useState(0);
-  const [monthlyRevenue, setMonthlyRevenue] = useState(0);
-  const [totalRevenue, setTotalRevenue] = useState(0); // New state for total revenue
-  const [selectedDate, setSelectedDate] = useState('');
-  const [selectedMonth, setSelectedMonth] = useState('');
+  const [date, setDate] = useState("");
+  const [month, setMonth] = useState("");
+  const [dailyRevenue, setDailyRevenue] = useState([]);
+  const [monthlyRevenue, setMonthlyRevenue] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [activeSection, setActiveSection] = useState("daily"); // "daily" hoặc "monthly"
 
-  const handleFilterByDate = () => {
-    if (!selectedDate) {
-      alert("Vui lòng chọn một ngày hợp lệ.");
-      return;
-    }
-    
-    const date = new Date(selectedDate);
-    if (isNaN(date)) {
-      alert("Vui lòng chọn một ngày hợp lệ.");
-      return;
-    }
-    
-    const dateString = date.toISOString().split('T')[0];
-    const bookingRef = ref(database, `bookings/${dateString}`);
-    
-    onValue(bookingRef, (snapshot) => {
-      let totalRevenueForDate = 0;
-      snapshot.forEach((childSnapshot) => {
-        totalRevenueForDate += childSnapshot.val().amount;
-      });
-      setDailyRevenue(totalRevenueForDate);
-      updateTotalRevenue(totalRevenueForDate, monthlyRevenue); // Update total revenue
-    });
-  };
-
-  const handleFilterByMonth = () => {
-    if (!selectedMonth) {
-      alert("Vui lòng chọn một tháng hợp lệ.");
-      return;
-    }
-    
-    const [year, month] = selectedMonth.split('-');
-    const bookingRef = ref(database, 'bookings');
-
-    onValue(bookingRef, (snapshot) => {
-      let totalRevenueForMonth = 0;
-      snapshot.forEach((childSnapshot) => {
-        const bookingDate = new Date(childSnapshot.key);
-        if (bookingDate.getFullYear() === parseInt(year) && bookingDate.getMonth() === parseInt(month) - 1) {
-          totalRevenueForMonth += childSnapshot.val().amount;
+  // Fetch daily revenue based on the selected date
+  const fetchDailyRevenue = () => {
+    setLoading(true);
+    const db = getDatabase();
+    const revenueRef = ref(db, `revenue/daily/${date}`);
+    onValue(
+        revenueRef,
+        (snapshot) => {
+          setLoading(false);
+          const data = snapshot.val();
+          if (data) {
+            setDailyRevenue(Object.values(data));
+          } else {
+            setDailyRevenue([]);
+          }
+        },
+        (error) => {
+          setLoading(false);
+          setError(error);
         }
-      });
-      setMonthlyRevenue(totalRevenueForMonth);
-      updateTotalRevenue(dailyRevenue, totalRevenueForMonth); // Update total revenue
-    });
+    );
   };
 
-  const updateTotalRevenue = (daily, monthly) => {
-    setTotalRevenue(daily + monthly); // Sum up daily and monthly revenues for total
+  // Fetch monthly revenue based on the selected month
+  const fetchMonthlyRevenue = () => {
+    setLoading(true);
+    const db = getDatabase();
+    const revenueRef = ref(db, `revenue/monthly/${month}`);
+    onValue(
+        revenueRef,
+        (snapshot) => {
+          setLoading(false);
+          const data = snapshot.val();
+          if (data) {
+            setMonthlyRevenue(Object.values(data));
+          } else {
+            setMonthlyRevenue([]);
+          }
+        },
+        (error) => {
+          setLoading(false);
+          setError(error);
+        }
+    );
   };
+
+  useEffect(() => {
+    if (date) fetchDailyRevenue();
+  }, [date]);
+
+  useEffect(() => {
+    if (month) fetchMonthlyRevenue();
+  }, [month]);
 
   return (
-    <div className="revenue-management">
-      <h2>Quản Lý Doanh Thu</h2>
+      <div className="revenue-management">
+        <h2>Quản Lý Doanh Thu</h2>
 
-      <div className="revenue-dashboard">
-        <div className="dashboard-item">
-          <h3>Doanh Thu Theo Ngày</h3>
-          <input
-            type="date"
-            value={selectedDate}
-            onChange={(e) => setSelectedDate(e.target.value)}
-            className="date-input"
-          />
-          <button onClick={handleFilterByDate} className="filter-button">Lọc</button>
-          <p>{dailyRevenue} VND</p>
+        <div className="filter-options">
+          <div>
+            <label htmlFor="date">Ngày:</label>
+            <input
+                type="date"
+                id="date"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+            />
+            <button
+                onClick={() => {
+                  setActiveSection("daily");
+                  fetchDailyRevenue();
+                }}
+            >
+              Xem Doanh Thu Theo Ngày
+            </button>
+          </div>
+
+          <div>
+            <label htmlFor="month">Tháng:</label>
+            <input
+                type="month"
+                id="month"
+                value={month}
+                onChange={(e) => setMonth(e.target.value)}
+            />
+            <button
+                onClick={() => {
+                  setActiveSection("monthly");
+                  fetchMonthlyRevenue();
+                }}
+            >
+              Xem Doanh Thu Theo Tháng
+            </button>
+          </div>
         </div>
 
-        <div className="dashboard-item">
-          <h3>Doanh Thu Theo Tháng</h3>
-          <input
-            type="month"
-            value={selectedMonth}
-            onChange={(e) => setSelectedMonth(e.target.value)}
-            className="month-input"
-          />
-          <button onClick={handleFilterByMonth} className="filter-button">Lọc</button>
-          <p>{monthlyRevenue} VND</p>
-        </div>
+        {loading && <p>Loading...</p>}
+        {error && <p>{`Error: ${error.message}`}</p>}
 
-        <div className="dashboard-item">
-          <h3>Tổng Doanh Thu</h3>
-          <p>{totalRevenue} VND</p> {/* Display total revenue */}
-        </div>
+        {/* Daily Revenue Section */}
+        {activeSection === "daily" && (
+            <div className="daily-revenue">
+              <h3>Doanh Thu Theo Ngày</h3>
+              <table>
+                <thead>
+                <tr>
+                  <th>Tuyến</th>
+                  <th>Mã xe</th>
+                  <th>Loại</th>
+                  <th>Số ghế</th>
+                  <th>Giường</th>
+                  <th>Limousine</th>
+                  <th>Tổng tiền</th>
+                </tr>
+                </thead>
+                <tbody>
+                {dailyRevenue.length ? (
+                    dailyRevenue.map((record, index) => (
+                        <tr key={index}>
+                          <td>{record.route}</td>
+                          <td>{record.carId}</td>
+                          <td>{record.type}</td>
+                          <td>{record.seatCount} ghế</td>
+                          <td>{record.bedCount} giường</td>
+                          <td>{record.limoCount} limousine</td>
+                          <td>{record.totalAmount} VND</td>
+                        </tr>
+                    ))
+                ) : (
+                    <tr>
+                      <td colSpan="7">Không có dữ liệu</td>
+                    </tr>
+                )}
+                </tbody>
+              </table>
+            </div>
+        )}
+
+        {/* Monthly Revenue Section */}
+        {activeSection === "monthly" && (
+            <div className="monthly-revenue">
+              <h3>Doanh Thu Theo Tháng</h3>
+              <table>
+                <thead>
+                <tr>
+                  <th>Ngày/tháng/năm</th>
+                  <th>Số ghế - Tổng tiền</th>
+                  <th>Giường - Tổng tiền</th>
+                  <th>Limousine - Tổng tiền</th>
+                </tr>
+                </thead>
+                <tbody>
+                {monthlyRevenue.length ? (
+                    monthlyRevenue.map((record, index) => (
+                        <tr key={index}>
+                          <td>{record.date}</td>
+                          <td>{record.seatCount} ghế - {record.seatTotal} VND</td>
+                          <td>{record.bedCount} giường - {record.bedTotal} VND</td>
+                          <td>{record.limoCount} limousine - {record.limoTotal} VND</td>
+                        </tr>
+                    ))
+                ) : (
+                    <tr>
+                      <td colSpan="4">Không có dữ liệu</td>
+                    </tr>
+                )}
+                </tbody>
+              </table>
+            </div>
+        )}
       </div>
-    </div>
   );
 }
 

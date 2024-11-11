@@ -1,68 +1,96 @@
 .quan-li-khach-hang {
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
-  
-  .quan-li-khach-hang h2 {
-    color: #2c3e50;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .quan-li-khach-hang form {
-    display: flex;
-    flex-direction: column;
-    max-width: 400px;
-    margin: 0 auto;
-  }
-  
-  .quan-li-khach-hang input[type="text"],
-  .quan-li-khach-hang input[type="email"],
-  .quan-li-khach-hang input[type="tel"],
-  .quan-li-khach-hang button {
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-  }
-  
-  .quan-li-khach-hang button {
-    background-color: #27ae60;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .quan-li-khach-hang button:hover {
-    background-color: #2ecc71;
-  }
-  
-  .quan-li-khach-hang table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-  
-  .quan-li-khach-hang table th,
-  .quan-li-khach-hang table td {
-    padding: 12px;
-    border: 1px solid #ddd;
-    text-align: center;
-  }
-  
-  .quan-li-khach-hang table th {
-    background-color: #3498db;
-    color: white;
-  }
-  
-  .quan-li-khach-hang .action-buttons {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .quan-li-khach-hang .action-buttons button {
-    padding: 5px 10px;
-    font-size: 14px;
-  }
-  
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+}
+
+.search-bar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.search-bar label {
+  font-size: 16px;
+  margin-right: 10px;
+  color: #555;
+}
+
+.search-bar input {
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  width: 250px;
+  margin-right: 10px;
+}
+
+.search-bar button {
+  padding: 8px 16px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.search-bar button:hover {
+  background-color: #0056b3;
+}
+
+h3 {
+  color: #333;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+p, ul {
+  font-size: 14px;
+  color: #555;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+button.seat-available {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+button.seat-available:hover {
+  background-color: #218838;
+}
+
+button.seat-booked {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  margin: 5px;
+  cursor: not-allowed;
+}
+
+button.seat-booked:hover {
+  background-color: #c82333;
+}

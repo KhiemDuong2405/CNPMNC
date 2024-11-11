@@ -74,11 +74,6 @@ function ChonChuyen() {
     }
   };
 
-  const generateRandomCode = () => {
-    return Math.random().toString(36).substring(2, 10).toUpperCase();
-  };
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 

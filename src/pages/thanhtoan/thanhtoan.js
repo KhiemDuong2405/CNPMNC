@@ -1,28 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { ref, set } from 'firebase/database';
-import { database } from '../../API/firebaseconfig';
 import './thanhtoan.css';
 
 function ThanhToan() {
     const location = useLocation();
     const navigate = useNavigate();
-    const { tripInfo, customerInfo, pickupDropoff, totalAmount } = location.state || {};
+    const { tripInfo, customerInfo, pickupDropoff, totalAmount} = location.state || {};
 
     const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('ZaloPay');
     const [paymentUrl, setPaymentUrl] = useState('');
-    const [remainingTime, setRemainingTime] = useState(600);
 
     const paymentMethods = [
         { name: 'ZaloPay', icon: '/icon-zalopay.png' },
         { name: 'VNPay', icon: '/icon-vnpay.png' }
     ];
 
-    const generateRandomCode = () => Math.random().toString(36).substring(2, 10).toUpperCase();
-
     const handlePaymentMethodChange = (method) => {
-        console.log("Phương thức thanh toán đã thay đổi:", method.name);
         setSelectedPaymentMethod(method.name);
         setPaymentUrl('');
     };
@@ -33,69 +27,30 @@ function ThanhToan() {
                 amount: totalAmount * 1000,
                 description: 'Thanh toán đơn hàng'
             });
-            console.log("Phản hồi từ server:", response.data);
-            console.log(response.data.order_url)
-            const paymentLink = response.data.order_url || response.data.qrCodeUrl;
+
+            const paymentLink = response.data.order_Url;
 
             if (paymentLink) {
                 setPaymentUrl(paymentLink);
-                window.location.href = paymentLink;
+                window.open(paymentLink, '_blank');
+
+                navigate('/ketquathanhtoan', {
+                    state: {
+                        transactionId: response.data.app_trans_id || null,
+                        tripInfo: tripInfo || {},
+                        customerInfo: customerInfo || {},
+                        pickupDropoff: pickupDropoff || {},
+                        totalAmount: totalAmount || 0,
+                        selectedPaymentMethod: selectedPaymentMethod || '',
+                    }
+                });
+
             } else {
-                console.warn("Không nhận được URL thanh toán từ phản hồi của server.");
-                alert("Có lỗi xảy ra khi thanh toán. Vui lòng thử lại.");
+                alert("Không nhận được URL thanh toán từ phản hồi của server.");
             }
         } catch (error) {
-            console.error("Lỗi khi tạo URL thanh toán:", error);
             alert("Có lỗi xảy ra khi thanh toán. Vui lòng thử lại.");
         }
-    };
-
-    const handlePaymentSuccess = async () => {
-        const bookingCode = generateRandomCode();
-        const bookingData = {
-            date: tripInfo?.searchDate || '',
-            hour: tripInfo?.hour || '',
-            from: tripInfo?.from || '',
-            ghe: tripInfo?.seats?.join(',') || '',
-            idxe: tripInfo?.busNumber || '',
-            name: customerInfo?.name || '',
-            price: totalAmount || 0,
-            to: tripInfo?.to || '',
-            type: tripInfo?.type || 'Ghế',
-        };
-
-        try {
-            console.log("Lưu thông tin thanh toán vào Firebase:", bookingData);
-            const bookingRef = ref(database, `bookings/${customerInfo?.phone}/${bookingCode}`);
-            await set(bookingRef, bookingData);
-            alert('Thanh toán thành công! Bạn sẽ được chuyển về trang chủ.');
-            navigate('/');
-        } catch (error) {
-            console.error("Lỗi khi lưu thông tin thanh toán:", error);
-            alert('Có lỗi xảy ra khi lưu thông tin thanh toán. Vui lòng thử lại.');
-        }
-    };
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setRemainingTime((prevTime) => {
-                if (prevTime <= 1) {
-                    clearInterval(interval);
-                    alert("Thời gian giữ chỗ đã hết. Bạn sẽ được chuyển về trang chủ.");
-                    navigate('/');
-                    return 0;
-                }
-                return prevTime - 1;
-            });
-        }, 1000);
-
-        return () => clearInterval(interval);
-    }, [navigate]);
-
-    const formatTime = (seconds) => {
-        const minutes = Math.floor(seconds / 60);
-        const remainingSeconds = seconds % 60;
-        return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
     };
 
     return (
@@ -118,34 +73,34 @@ function ThanhToan() {
                         </label>
                     </div>
                 ))}
-                <button className="confirm-button" onClick={handleConfirmPayment}>Thực hiện thanh toán thanh toán
+                <button className="confirm-button" onClick={handleConfirmPayment}>
+                    Thực hiện thanh toán
                 </button>
             </div>
 
             <div className="trip-info">
                 <h3>Thông tin hành khách</h3>
-                <p>Họ và tên: <br/> {customerInfo?.name || ''}</p>
-                <p>Số điện thoại: <br/> {customerInfo?.phone || ''}</p>
-                <p>Email: <br/> {customerInfo?.email || ''}</p>
+                <p>Họ và tên: <span>{customerInfo?.name || ''}</span></p>
+                <p>Số điện thoại: <span>{customerInfo?.phone || ''}</span></p>
+                <p>Email: <span>{customerInfo?.email || ''}</span></p>
             </div>
 
             <div className="price-info">
                 <h3>Chi tiết giá</h3>
-                <p>Giá vé lượt đi <br/> {totalAmount ? `${totalAmount}.000đ` : ''}</p>
-                <p>Phí thanh toán <br/> 0đ</p>
-                <p className="total-line">Tổng tiền <br/> {totalAmount ? `${totalAmount}.000đ` : ''}</p>
+                <p>Giá vé lượt đi: <span>{totalAmount ? `${totalAmount}.000đ` : ''}</span></p>
+                <p>Phí thanh toán: <span>0đ</span></p>
+                <p className="total-line">Tổng tiền: <span>{totalAmount ? `${totalAmount}.000đ` : ''}</span></p>
             </div>
 
             <div className="trip-info">
                 <h3>Thông tin lượt đi</h3>
-                <p>Tuyến xe: <br/> {tripInfo ? `${tripInfo.from} - ${tripInfo.to}` : ''}</p>
-                <p>Giờ xuất bến: {tripInfo?.hour || ''}</p>
-                <p>Số lượng ghế: {tripInfo?.seatCount || ''}</p>
-                <p>Mã ghế: {tripInfo?.seats?.join(', ') || ''}</p>
-                <p>Điểm đón:<br/> {pickupDropoff?.pickup || ''}</p>
-                <p>Điểm trả:<br/> {pickupDropoff?.dropoff || ''}</p>
+                <p>Tuyến xe: <br/> <span>{tripInfo ? `${tripInfo.from} - ${tripInfo.to}` : ''}</span></p>
+                <p>Giờ xuất bến: <span>{tripInfo?.hour || ''}</span></p>
+                <p>Số lượng ghế: <span>{tripInfo?.seatCount || ''}</span></p>
+                <p>Mã ghế: <span>{tripInfo?.seats?.join(', ') || ''}</span></p>
+                <p>Điểm đón: <br/> <span>{pickupDropoff?.pickup || ''}</span></p>
+                <p>Điểm trả: <br/> <span>{pickupDropoff?.dropoff || ''}</span></p>
             </div>
-
         </div>
     );
 }
