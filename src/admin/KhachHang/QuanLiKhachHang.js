@@ -7,43 +7,59 @@ function QuanLiKhachHang() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [customer, setCustomer] = useState(null);
   const [loadingCustomer, setLoadingCustomer] = useState(false);
-  const [tripDetails, setTripDetails] = useState(null);
-  const [loadingTrip, setLoadingTrip] = useState(true);
+  const [allCustomers, setAllCustomers] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  // Fetch thông tin chuyến đi khi ứng dụng khởi động
+  // Tự động tải tất cả khách hàng khi component mount
   useEffect(() => {
-    const tripRef = ref(database, `Trips/2024-11-07/TP Hồ Chí Minh/Tiền Giang/09:37_Giường`);
-    onValue(tripRef, (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        setTripDetails(data);
-      }
-      setLoadingTrip(false);
-    }, () => {
-      setLoadingTrip(false);
-    });
+    fetchCustomer(); // Tải tất cả khách hàng khi truy cập vào trang
   }, []);
 
-  // Fetch thông tin khách hàng khi nhập số điện thoại
+  // Hàm fetch thông tin khách hàng
   const fetchCustomer = () => {
     setLoadingCustomer(true);
-    const customerRef = ref(database, `Customers/${phoneNumber}`);
-    onValue(customerRef, (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        setCustomer({ phoneNumber, ...data });
-      } else {
-        setCustomer(null); // Nếu không tìm thấy khách hàng
-      }
-      setLoadingCustomer(false);
-    });
+    setCustomer(null);         // Xóa dữ liệu khách hàng cũ
+    setAllCustomers(null);      // Xóa dữ liệu tất cả khách hàng cũ
+    setErrorMessage("");        // Reset thông báo lỗi
+
+    if (phoneNumber) {
+      // Truy vấn một khách hàng theo số điện thoại từ node `user`
+      const customerRef = ref(database, `user/${phoneNumber}`);
+      onValue(customerRef, (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+          setCustomer({ phoneNumber, ...data });
+        } else {
+          setErrorMessage("Không có thông tin khách hàng với số điện thoại này.");
+        }
+        setLoadingCustomer(false);
+      }, (error) => {
+        console.error("Lỗi khi truy xuất dữ liệu:", error);
+        setLoadingCustomer(false);
+        setErrorMessage("Lỗi khi truy xuất dữ liệu.");
+      });
+    } else {
+      // Truy vấn tất cả khách hàng
+      const allCustomersRef = ref(database, `user`);
+      onValue(allCustomersRef, (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+          setAllCustomers(Object.entries(data)); // Lưu danh sách tất cả khách hàng
+        } else {
+          setErrorMessage("Không có thông tin khách hàng.");
+        }
+        setLoadingCustomer(false);
+      }, (error) => {
+        console.error("Lỗi khi truy xuất dữ liệu:", error);
+        setLoadingCustomer(false);
+        setErrorMessage("Lỗi khi truy xuất dữ liệu.");
+      });
+    }
   };
 
   // Xử lý khi người dùng nhấn nút tìm kiếm
   const handleSearch = () => {
-    if (phoneNumber) {
-      fetchCustomer();
-    }
+    fetchCustomer();
   };
 
   return (
@@ -63,58 +79,49 @@ function QuanLiKhachHang() {
           <button onClick={handleSearch}>Tìm Kiếm</button>
         </div>
 
-        {/* Hiển thị thông tin khách hàng */}
+        {/* Hiển thị bảng thông tin khách hàng */}
+        <h3>Danh Sách Khách Hàng</h3>
         {loadingCustomer ? (
             <p>Đang tải thông tin khách hàng...</p>
-        ) : customer ? (
-            <div>
-              <h3>Thông Tin Khách Hàng</h3>
-              <p><strong>Tên:</strong> {customer.name}</p>
-              <p><strong>Số Điện Thoại:</strong> {customer.phoneNumber}</p>
-
-              {/* Hiển thị số vé đã đặt nếu có */}
-              {customer.bookings ? (
-                  <div>
-                    <h4>Vé đã đặt:</h4>
-                    <ul>
-                      {Object.keys(customer.bookings).map((bookingKey) => (
-                          <li key={bookingKey}>
-                            <strong>{bookingKey}</strong> - Ghế: {customer.bookings[bookingKey].seat}
-                          </li>
-                      ))}
-                    </ul>
-                  </div>
-              ) : (
-                  <p>Không có vé đã đặt.</p>
-              )}
-            </div>
-        ) : phoneNumber && !loadingCustomer ? (
-            <p>Không tìm thấy khách hàng với số điện thoại này.</p>
-        ) : null}
-
-        {/* Hiển thị thông tin chuyến đi */}
-        <h3>Thông Tin Chuyến Đi</h3>
-        {loadingTrip ? (
-            <p>Đang tải thông tin chuyến đi...</p>
-        ) : tripDetails ? (
-            <div>
-              <p><strong>Khoảng cách:</strong> {tripDetails.distance}</p>
-              <p><strong>Thời gian:</strong> {tripDetails.duration}</p>
-              <p><strong>Giá:</strong> {tripDetails.price} VND</p>
-              <h4>Tình trạng Ghế:</h4>
-              <div>
-                {Object.keys(tripDetails.seats).map((seat) => (
-                    <button
-                        key={seat}
-                        className={tripDetails.seats[seat] ? 'seat-booked' : 'seat-available'}
-                    >
-                      {seat}
-                    </button>
-                ))}
-              </div>
-            </div>
         ) : (
-            <p>Không có thông tin chuyến đi.</p>
+            <table className="customer-table">
+              <thead>
+              <tr>
+                <th>STT</th>
+                <th>Tên Khách Hàng</th>
+                <th>Email</th>
+                <th>Đăng nhập lần đầu</th>
+                <th>Số Điện Thoại</th>
+              </tr>
+              </thead>
+              <tbody>
+              {customer ? (
+                  <tr>
+                    <td>1</td>
+                    <td>{customer.Name}</td>
+                    <td>{customer.Email}</td>
+                    <td>{customer.firstLogin}</td>
+                    <td>{customer.phoneNumber}</td>
+                  </tr>
+              ) : allCustomers && allCustomers.length > 0 ? (
+                  allCustomers.map(([key, customerData], index) => (
+                      <tr key={key}>
+                        <td>{index + 1}</td>
+                        <td>{customerData.Name}</td>
+                        <td>{customerData.Email}</td>
+                        <td>{customerData.firstLogin}</td>
+                        <td>{key}</td>
+                      </tr>
+                  ))
+              ) : (
+                  <tr>
+                    <td colSpan="5" style={{ textAlign: 'center'}}>
+                      {errorMessage || "Không có thông tin khách hàng."}
+                    </td>
+                  </tr>
+              )}
+              </tbody>
+            </table>
         )}
       </div>
   );
