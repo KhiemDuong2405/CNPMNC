@@ -23,20 +23,29 @@ function ThanhToan() {
 
     const handleConfirmPayment = async () => {
         try {
-            const response = await axios.post('/api/createOrder', {
-                amount: totalAmount * 1000,
-                description: 'Thanh toán đơn hàng'
-            });
+            let response;
 
-            const paymentLink = response.data.order_Url;
+            if (selectedPaymentMethod === 'ZaloPay') {
+                response = await axios.post('/api/createOrder', {
+                    amount: totalAmount * 1000,
+                    description: 'Thanh toán đơn hàng qua ZaloPay'
+                });
+            } else if (selectedPaymentMethod === 'VNPay') {
+                response = await axios.post('http://localhost:3500/api/createVnpayOrder', {
+                    amount: totalAmount * 1000,
+                    orderInfo: 'Thanh+toán+đơn+hàng+VNPay'
+                });
+            }
 
+            const paymentLink = response?.data?.paymentUrl || response?.data?.order_Url;
+            console.log(paymentLink);
             if (paymentLink) {
                 setPaymentUrl(paymentLink);
                 window.open(paymentLink, '_blank');
 
                 navigate('/ketquathanhtoan', {
                     state: {
-                        transactionId: response.data.app_trans_id || null,
+                        transactionId: response.data.app_trans_id || response.data.orderId || null,
                         tripInfo: tripInfo || {},
                         customerInfo: customerInfo || {},
                         pickupDropoff: pickupDropoff || {},
@@ -44,14 +53,15 @@ function ThanhToan() {
                         selectedPaymentMethod: selectedPaymentMethod || '',
                     }
                 });
-
             } else {
                 alert("Không nhận được URL thanh toán từ phản hồi của server.");
             }
         } catch (error) {
+            console.error("Lỗi khi thanh toán:", error);
             alert("Có lỗi xảy ra khi thanh toán. Vui lòng thử lại.");
         }
     };
+
 
     return (
         <div className="payment-container">

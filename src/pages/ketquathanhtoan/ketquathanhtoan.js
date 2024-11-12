@@ -9,7 +9,7 @@ function KetQuaThanhToan() {
     const navigate = useNavigate();
     const { transactionId, tripInfo, customerInfo, totalAmount, selectedPaymentMethod } = location.state || {};
     const [paymentStatus, setPaymentStatus] = useState('pending');
-    const [message, setMessage] = useState('Đang xử lý kết quả thanh toán...');
+    const [message, setMessage] = useState('Đang xử lý quá trình thanh toán...');
 
     const saveTransactionToDatabase = async () => {
         const bookingCode = Math.random().toString(36).substring(2, 10).toUpperCase();
@@ -86,7 +86,7 @@ function KetQuaThanhToan() {
     };
 
     useEffect(() => {
-        const interval = setInterval(checkPaymentStatus, 1000);
+        const interval = setInterval(checkPaymentStatus, 3000);
         if (paymentStatus !== 'pending') clearInterval(interval);
         return () => clearInterval(interval);
     }, [paymentStatus]);
