@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import {ref, set, update} from 'firebase/database';
+import { ref, set, update } from 'firebase/database';
 import axios from 'axios';
 import { database } from '../../API/firebaseconfig';
 
@@ -10,8 +10,13 @@ function KetQuaThanhToan() {
     const { transactionId, tripInfo, customerInfo, totalAmount, selectedPaymentMethod } = location.state || {};
     const [paymentStatus, setPaymentStatus] = useState('pending');
     const [message, setMessage] = useState('Đang xử lý quá trình thanh toán...');
+    const [hasSaved, setHasSaved] = useState(false);  // Biến cờ để kiểm soát việc lưu và gửi email
 
     const saveTransactionToDatabase = async () => {
+        if (hasSaved) return;  // Nếu đã lưu, dừng lại
+
+        setHasSaved(true);  // Đặt cờ đã lưu để không gọi lại hàm này lần nữa
+
         const bookingCode = Math.random().toString(36).substring(2, 10).toUpperCase();
         const bookingData = {
             date: tripInfo?.searchDate || '',
@@ -48,51 +53,49 @@ function KetQuaThanhToan() {
             const response = await fetch('http://localhost:5001/send-ticket', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email: customerInfo.email, bookingInfo: emailData}),
+                body: JSON.stringify({ email: customerInfo.email, bookingInfo: emailData }),
             });
 
             if (response.ok) {
-                setPaymentStatus('success');
                 setMessage('Thanh toán thành công. Vé của bạn đã được gửi qua Email, vui lòng kiểm tra Email');
             } else {
-                setPaymentStatus('success');
                 setMessage('Thanh toán thành công nhưng không thể gửi email.');
             }
 
         } catch (error) {
             console.error("Lỗi khi lưu thông tin thanh toán:", error);
-            setPaymentStatus('failed');
             setMessage('Có lỗi xảy ra khi lưu thông tin thanh toán. Vui lòng thử lại.');
         }
     };
 
-    const checkPaymentStatus = async () => {
-        try {
-            const response = await axios.get(`/api/payment-status/${transactionId}`);
-            if (response.data.status === 'success') {
-                saveTransactionToDatabase();
-            } else if (response.data.status === 'failed') {
-                setPaymentStatus('failed');
-                setMessage("Thanh toán thất bại.");
-            } else if (response.data.status === 'canceled') {
-                setPaymentStatus('canceled');
-                setMessage("Giao dịch đã bị hủy bởi người dùng.");
-            }
-        } catch (error) {
-            console.error("Lỗi khi kiểm tra trạng thái thanh toán:", error);
-            setPaymentStatus('failed');
-            setMessage("Có lỗi xảy ra khi kiểm tra trạng thái thanh toán. Vui lòng thử lại.");
-        }
-    };
-
     useEffect(() => {
-        const interval = setInterval(checkPaymentStatus, 3000);
-        if (paymentStatus !== 'pending') clearInterval(interval);
-        return () => clearInterval(interval);
-    }, [paymentStatus]);
+        const checkPaymentStatus = async () => {
+            try {
+                const response = await axios.get(`/api/payment-status/${transactionId}`);
+                if (response.data.status === 'success' && !hasSaved) {
+                    await saveTransactionToDatabase();  // Lưu giao dịch
+                    setPaymentStatus('success');        // Cập nhật trạng thái để dừng lặp
+                } else if (response.data.status === 'failed') {
+                    setPaymentStatus('failed');
+                    setMessage("Thanh toán thất bại.");
+                } else if (response.data.status === 'canceled') {
+                    setPaymentStatus('canceled');
+                    setMessage("Giao dịch đã bị hủy bởi người dùng.");
+                }
+            } catch (error) {
+                console.error("Lỗi khi kiểm tra trạng thái thanh toán:", error);
+                setPaymentStatus('failed');
+                setMessage("Có lỗi xảy ra khi kiểm tra trạng thái thanh toán. Vui lòng thử lại.");
+            }
+        };
+
+        if (paymentStatus === 'pending') {
+            checkPaymentStatus();
+        }
+    }, [paymentStatus, hasSaved]);
 
     return (
-        <div style={{ textAlign: 'center', padding: '20px', marginBottom: paymentStatus === 'success' ? '180px' : '230px'  }}>
+        <div style={{ textAlign: 'center', padding: '20px', marginBottom: paymentStatus === 'success' ? '180px' : '230px' }}>
             <h2>{message}</h2>
             {paymentStatus !== 'pending' && (
                 <button

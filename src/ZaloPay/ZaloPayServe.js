@@ -15,7 +15,7 @@ const config = {
     key1: "sdngKKJmqEMzvh5QQcdD2A9XBSKUNaYn",
     key2: "trMrHtvjo6myautxDUiAcYsVtaeQ8nhf",
     endpoint: "https://sb-openapi.zalopay.vn/v2/create",
-    callback_url: "https://0942-113-172-94-250.ngrok-free.app/api/zalopay/callback",
+    callback_url: "https://7f14-113-172-94-250.ngrok-free.app/api/zalopay/callback",
 };
 
 app.post('/api/createOrder', async (req, res) => {
