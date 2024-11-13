@@ -69,7 +69,7 @@ function KetQuaThanhToan() {
     };
 
     useEffect(() => {
-        const checkPaymentStatus = async () => {
+        const interval = setInterval(async () => {
             try {
                 const response = await axios.get(`/api/payment-status/${transactionId}`);
                 if (response.data.status === 'success' && !hasSaved) {
@@ -87,19 +87,26 @@ function KetQuaThanhToan() {
                 setPaymentStatus('failed');
                 setMessage("Có lỗi xảy ra khi kiểm tra trạng thái thanh toán. Vui lòng thử lại.");
             }
-        };
+        }, 3000);
 
-        if (paymentStatus === 'pending') {
-            checkPaymentStatus();
+        if (paymentStatus !== 'pending') {
+            clearInterval(interval);
         }
+
+        return () => clearInterval(interval);
     }, [paymentStatus, hasSaved]);
+
+
+    const handleReturnHome = () => {
+        navigate('/', { replace: true });
+    };
 
     return (
         <div style={{ textAlign: 'center', padding: '20px', marginBottom: paymentStatus === 'success' ? '180px' : '230px' }}>
             <h2>{message}</h2>
             {paymentStatus !== 'pending' && (
                 <button
-                    onClick={() => navigate('/')}
+                    onClick={handleReturnHome}
                     style={{
                         padding: '10px 20px',
                         fontSize: '16px',
