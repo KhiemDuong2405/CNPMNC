@@ -100,3 +100,7 @@ input[type="radio"] {
     color: #e74c3c;
     margin-top: 10px;
 }
+
+.info-details span{
+    font-weight: 300;
+}

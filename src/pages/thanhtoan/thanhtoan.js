@@ -38,7 +38,7 @@ function ThanhToan() {
             }
 
             const paymentLink = response?.data?.paymentUrl || response?.data?.order_Url;
-            console.log(paymentLink);
+
             if (paymentLink) {
                 setPaymentUrl(paymentLink);
                 window.open(paymentLink, '_blank');
@@ -88,26 +88,26 @@ function ThanhToan() {
                 </button>
             </div>
 
-            <div className="trip-info">
+            <div className="trip-info info-details">
                 <h3>Thông tin hành khách</h3>
-                <p>Họ và tên: <span>{customerInfo?.name || ''}</span></p>
-                <p>Số điện thoại: <span>{customerInfo?.phone || ''}</span></p>
-                <p>Email: <span>{customerInfo?.email || ''}</span></p>
+                <p>Họ và tên: <br/> <span>{customerInfo?.name || ''}</span></p>
+                <p>Số điện thoại: <br/> <span>{customerInfo?.phone || ''}</span></p>
+                <p>Email: <br/> <span>{customerInfo?.email || ''}</span></p>
             </div>
 
-            <div className="price-info">
+            <div className="price-info info-details">
                 <h3>Chi tiết giá</h3>
                 <p>Giá vé lượt đi: <span>{totalAmount ? `${totalAmount}.000đ` : ''}</span></p>
                 <p>Phí thanh toán: <span>0đ</span></p>
                 <p className="total-line">Tổng tiền: <span>{totalAmount ? `${totalAmount}.000đ` : ''}</span></p>
             </div>
 
-            <div className="trip-info">
+            <div className="trip-info info-details">
                 <h3>Thông tin lượt đi</h3>
                 <p>Tuyến xe: <br/> <span>{tripInfo ? `${tripInfo.from} - ${tripInfo.to}` : ''}</span></p>
                 <p>Giờ xuất bến: <span>{tripInfo?.hour || ''}</span></p>
                 <p>Số lượng ghế: <span>{tripInfo?.seatCount || ''}</span></p>
-                <p>Mã ghế: <span>{tripInfo?.seats?.join(', ') || ''}</span></p>
+                <p>Mã ghế đặt: <br/> <span>{tripInfo?.seats?.join(', ') || ''}</span></p>
                 <p>Điểm đón: <br/> <span>{pickupDropoff?.pickup || ''}</span></p>
                 <p>Điểm trả: <br/> <span>{pickupDropoff?.dropoff || ''}</span></p>
             </div>

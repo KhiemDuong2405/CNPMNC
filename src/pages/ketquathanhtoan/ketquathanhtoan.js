@@ -73,8 +73,8 @@ function KetQuaThanhToan() {
             try {
                 const response = await axios.get(`/api/payment-status/${transactionId}`);
                 if (response.data.status === 'success' && !hasSaved) {
-                    await saveTransactionToDatabase();  // Lưu giao dịch
-                    setPaymentStatus('success');        // Cập nhật trạng thái để dừng lặp
+                    await saveTransactionToDatabase();
+                    setPaymentStatus('success');
                 } else if (response.data.status === 'failed') {
                     setPaymentStatus('failed');
                     setMessage("Thanh toán thất bại.");
