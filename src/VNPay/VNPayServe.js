@@ -46,7 +46,7 @@ app.post('/api/createVnpayOrder', (req, res) => {
 
         const vnpUrl = `${config.vnp_Url}?${qs.stringify(sortedParams, { encode: false })}`;
 
-        console.log("Url:", vnpUrl);
+        // console.log("Url:", vnpUrl);
 
         res.json({ paymentUrl: vnpUrl });
     } catch (error) {
