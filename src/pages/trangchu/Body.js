@@ -85,23 +85,30 @@ function Body() {
 
   const handleSearch = () => {
     const now = new Date();
+    const currentDate = now.toISOString().split("T")[0];
     const currentHours = now.getHours();
     const currentMinutes = now.getMinutes();
 
     const matchedTrips = tripsWithSeats.filter(trip => {
       const [tripHours, tripMinutes] = trip.timedi.split(":").map(Number);
 
-      return (
-          trip.from === from &&
-          trip.to === to &&
-          trip.date === date &&
-          (tripHours > currentHours || (tripHours === currentHours && tripMinutes > currentMinutes))
-      );
+      if (trip.date > currentDate) {
+        return trip.from === from && trip.to === to && trip.date === date;
+      } else if (trip.date === currentDate) {
+        return (
+            trip.from === from &&
+            trip.to === to &&
+            trip.date === date &&
+            (tripHours > currentHours || (tripHours === currentHours && tripMinutes > currentMinutes))
+        );
+      }
+      return false;
     });
 
     setFilteredTrips(matchedTrips);
     setShowTicketSection(true);
   };
+
 
 
 
