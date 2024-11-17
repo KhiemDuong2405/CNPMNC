@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import './lichtrinh.css'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExchangeAlt, faSearch } from '@fortawesome/free-solid-svg-icons';
+// import { faExchangeAlt, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faExchangeAlt } from '@fortawesome/free-solid-svg-icons';
+
 import { database } from '../../API/firebaseconfig';
 import { ref, onValue } from "firebase/database"; // Sử dụng onValue để lắng nghe sự thay đổi dữ liệu
 
 function LichTrinh() {
   const [routes, setRoutes] = useState([]); // Khởi tạo state để lưu trữ dữ liệu routes
 
-  // useEffect để lấy dữ liệu từ Firebase khi component mount
   useEffect(() => {
     const routesRef = ref(database, 'routes/'); // Tham chiếu tới 'routes' trên Firebase
     onValue(routesRef, (snapshot) => {
@@ -16,16 +17,15 @@ function LichTrinh() {
       const routesArray = [];
 
       if (data) {
-        // Duyệt qua dữ liệu theo cấu trúc from -> to
         Object.keys(data).forEach(from => {
           Object.keys(data[from]).forEach(to => {
-            if (data[from][to]) {  // Kiểm tra data[from][to] có tồn tại không
+            if (data[from][to]) {
               Object.keys(data[from][to]).forEach(type => {
                 routesArray.push({
-                  from, // Điểm đi
-                  to, // Điểm đến
+                  from,
+                  to,
                   type,
-                  ...data[from][to][type] // Lấy các thông tin còn lại như loại xe, quãng đường, thời gian và giá
+                  ...data[from][to][type]
                 });
               });
             }

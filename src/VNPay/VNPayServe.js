@@ -92,5 +92,5 @@ app.get('/api/vnpay_return', (req, res) => {
 
 const PORT = 3500;
 app.listen(PORT, () => {
-    console.log(`VNPay Server is running on port ${PORT}`);
+    console.log(`API VNPay đang chạy tại port ${PORT}`);
 });

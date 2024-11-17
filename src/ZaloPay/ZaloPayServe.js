@@ -90,5 +90,5 @@ app.get('/api/payment-status/:transactionId', (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`ZaloPay API server đang chạy tại port ${PORT}`);
+    console.log(`API ZaloPay đang chạy tại port ${PORT}`);
 });

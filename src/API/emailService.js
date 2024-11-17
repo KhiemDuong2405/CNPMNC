@@ -65,5 +65,5 @@ app.post('/send-ticket', async (req, res) => {
 
 const PORT = 5001;
 app.listen(PORT, () => {
-  console.log(`API server đang chạy trên cổng ${PORT}`);
+  console.log(`API Email Service đang chạy trên cổng ${PORT}`);
 });

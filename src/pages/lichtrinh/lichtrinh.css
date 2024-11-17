@@ -55,7 +55,7 @@
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr; /* Chia đều các cột, nút tìm tuyến xe là 1 cột riêng */
   background-color: #f0f0f0;
-  padding: 15px 0px; /* Căn chỉnh khoảng cách đều cho các ô trong header */
+  padding: 15px 0; /* Căn chỉnh khoảng cách đều cho các ô trong header */
   border-radius: 10px;
   font-weight: bold;
   text-align: center;
@@ -77,7 +77,7 @@
   grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr; /* Đảm bảo các cột dữ liệu đồng nhất với header */
   padding: 15px 10px;
   border-bottom: 1px solid #eee;
-  align-items: center; /* Căn giữa nội dung theo chiều dọc */
+  align-items: center;
 }
 
 .route-details {
@@ -138,6 +138,7 @@
 
 .route-row td {
   text-align: center;
+  border: none !important;
 }
 
 /* Responsive Design */
