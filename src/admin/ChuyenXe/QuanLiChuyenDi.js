@@ -180,7 +180,7 @@ const isLicensePlateInUseForDay = async (date, idxe) => {
     }
   
     const { from, to, distance, duration, type, price } = selectedRoute;
-    const turnAroundTime = 30; // Thời gian nghỉ giữa các chuyến khứ hồi, tính bằng phút
+    const turnAroundTime = 30; // Thời gian nghỉ giữa các chuyến khứ hồi
     
     let currentTimedi = "08:00"; // Giờ khởi hành ban đầu
     let currentFrom = from;
@@ -248,7 +248,6 @@ const handleEdit = (trip) => {
   setIsEditMode(true);
   setEditTripPath(`Trips/${trip.date}/${trip.from}/${trip.to}/${trip.timedi}_${trip.type}`);
 };
-
 
   // Tạo dữ liệu ghế ngồi
   const generateSeatData = () => {

@@ -10,12 +10,12 @@ function KetQuaThanhToan() {
     const { transactionId, tripInfo, customerInfo, totalAmount, selectedPaymentMethod } = location.state || {};
     const [paymentStatus, setPaymentStatus] = useState('pending');
     const [message, setMessage] = useState('Đang xử lý quá trình thanh toán...');
-    const [hasSaved, setHasSaved] = useState(false);  // Biến cờ để kiểm soát việc lưu và gửi email
+    const [hasSaved, setHasSaved] = useState(false);  
 
     const saveTransactionToDatabase = async () => {
-        if (hasSaved) return;  // Nếu đã lưu, dừng lại
+        if (hasSaved) return;  
 
-        setHasSaved(true);  // Đặt cờ đã lưu để không gọi lại hàm này lần nữa
+        setHasSaved(true);  
 
         const bookingCode = Math.random().toString(36).substring(2, 10).toUpperCase();
         const bookingData = {
@@ -33,6 +33,17 @@ function KetQuaThanhToan() {
             status: 'Thành công',
         };
 
+        const infoUserBooking ={
+            Email: customerInfo.email,
+            Name: customerInfo.name
+        }
+
+        const emailData = {
+            ...bookingData,
+            phone: customerInfo.phone,
+            bookingCode
+        };
+
         try {
             const bookingRef = ref(database, `bookings/${customerInfo?.phone}/${bookingCode}`);
             await set(bookingRef, bookingData);
@@ -44,11 +55,8 @@ function KetQuaThanhToan() {
             });
             await update(seatsRef, updates);
 
-            const emailData = {
-                ...bookingData,
-                phone: customerInfo.phone,
-                bookingCode
-            };
+            const infoUserRef = ref(database, `user/${customerInfo?.phone}`);
+            await set(infoUserRef, infoUserBooking);
 
             const response = await fetch('http://localhost:5001/send-ticket', {
                 method: 'POST',

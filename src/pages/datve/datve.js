@@ -40,6 +40,15 @@ function ChonChuyen() {
         : defaultSeats,
   };
 
+  const parsePriceToInt = (priceString) => {
+    return parseInt(priceString.replace(/,/g, ''), 10);
+  };
+
+  const formatPriceToString = (priceInt) => {
+    return priceInt.toLocaleString('vi-VN'); // Định dạng số theo chuẩn Việt Nam
+  };
+
+
   useEffect(() => {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
@@ -88,6 +97,8 @@ function ChonChuyen() {
     }
 
     try {
+      const priceInt = parsePriceToInt(selectedTrip?.price);
+
       const tripInfo = {
         from: selectedTrip.from,
         to: selectedTrip.to,
@@ -97,7 +108,7 @@ function ChonChuyen() {
         searchDate: selectedTrip.date,
         busNumber: selectedTrip.idxe,
         type: selectedTrip.type,
-        price: selectedTrip.price,
+        price: priceInt,
         hour: selectedTrip.timedi,
       };
 
@@ -106,7 +117,7 @@ function ChonChuyen() {
         dropoff: `Bến xe ${selectedTrip.to}`,
       };
 
-      const totalAmount = selectedTrip.price * selectedSeats.length;
+      const totalAmount = parsePriceToInt(selectedTrip?.price) * selectedSeats.length;
 
       const customerInfoData = {
         name: customerInfo.name,
@@ -254,7 +265,7 @@ function ChonChuyen() {
                 <span className="method-name">FUTAPAY</span>
                 <span className="price">
                 {selectedSeats.length > 0
-                    ? `${(selectedTrip?.price || 0) * selectedSeats.length}.000đ`
+                    ? `${formatPriceToString(parsePriceToInt(selectedTrip?.price) * selectedSeats.length)}đ`
                     : '0đ'}
               </span>
               </div>

@@ -21,13 +21,17 @@ function ThanhToan() {
         setPaymentUrl('');
     };
 
+    const formatPriceToString = (priceInt) => {
+        return priceInt.toLocaleString('vi-VN'); // Định dạng số theo chuẩn Việt Nam
+    };
+
     const handleConfirmPayment = async () => {
         try {
             let response;
 
             if (selectedPaymentMethod === 'ZaloPay') {
-                response = await axios.post('/api/createOrder', {
-                    amount: totalAmount * 1000,
+                    response = await axios.post('/api/createOrder', {
+                    amount: totalAmount,
                     description: 'Thanh toán đơn hàng qua ZaloPay'
                 });
             } else if (selectedPaymentMethod === 'VNPay') {
@@ -97,9 +101,9 @@ function ThanhToan() {
 
             <div className="price-info info-details">
                 <h3>Chi tiết giá</h3>
-                <p>Giá vé lượt đi: <span>{totalAmount ? `${totalAmount}.000đ` : ''}</span></p>
+                <p>Giá vé lượt đi: <span>{totalAmount ? `${formatPriceToString(totalAmount)}đ` : ''}</span></p>
                 <p>Phí thanh toán: <span>0đ</span></p>
-                <p className="total-line">Tổng tiền: <span>{totalAmount ? `${totalAmount}.000đ` : ''}</span></p>
+                <p className="total-line">Tổng tiền: <span>{totalAmount ? `${formatPriceToString(totalAmount)}đ` : ''}</span></p>
             </div>
 
             <div className="trip-info info-details">
