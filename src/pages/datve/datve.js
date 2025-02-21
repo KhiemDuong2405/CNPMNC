@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { ref, push, update, set } from 'firebase/database';
-import { database } from '../../API/firebaseconfig';
+// import { ref, push, update, set } from 'firebase/database';
+// import { database } from '../../API/firebaseconfig';
 import './datve.css';
 
 function ChonChuyen() {
@@ -265,7 +265,7 @@ function ChonChuyen() {
                 <span className="method-name">FUTAPAY</span>
                 <span className="price">
                 {selectedSeats.length > 0
-                    ? `${formatPriceToString(parsePriceToInt(selectedTrip?.price) * selectedSeats.length)}đ`
+                    ? `${formatPriceToString(parsePriceToInt(selectedTrip?.price) * selectedSeats.length)}.000đ`
                     : '0đ'}
               </span>
               </div>

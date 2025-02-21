@@ -11,11 +11,12 @@ app.use(cors());
 app.use(express.json());
 
 const config = {
-    app_id: "2554",
-    key1: "sdngKKJmqEMzvh5QQcdD2A9XBSKUNaYn",
-    key2: "trMrHtvjo6myautxDUiAcYsVtaeQ8nhf",
-    endpoint: "https://sb-openapi.zalopay.vn/v2/create",
-    callback_url: "https://a7cc-113-172-94-250.ngrok-free.app/api/zalopay/callback",
+  app_id: "2554",
+  key1: "sdngKKJmqEMzvh5QQcdD2A9XBSKUNaYn",
+  key2: "trMrHtvjo6myautxDUiAcYsVtaeQ8nhf",
+  endpoint: "https://sb-openapi.zalopay.vn/v2/create",
+  callback_url:
+    "https://a89d-14-186-113-179.ngrok-free.app/api/zalopay/callback", //ngrok http http:localhost:3000
 };
 
 app.post('/api/createOrder', async (req, res) => {
